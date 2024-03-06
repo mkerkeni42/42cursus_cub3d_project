@@ -6,19 +6,7 @@
 #    By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 14:33:00 by mkerkeni          #+#    #+#              #
-#    Updated: 2024/03/05 14:38:09 by mkerkeni         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/02/22 12:41:15 by mkerkeni          #+#    #+#              #
-#    Updated: 2023/03/31 13:32:20 by mkerkeni         ###   ########.fr        #
+#    Updated: 2024/03/06 21:46:23 by mkerkeni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +18,9 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
-LINKS = #chercher les bons flags pour compiler mlx linux
 #CFLAGS += -fsanitize=address -g3
+
+HEADER = ./
 
 SRCS = 
 
@@ -45,7 +34,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@echo "	Compilation in progress..."
 	@$(MAKE) -C $(LIBFT)
-	@$(CC) $(CFLAGS) $(LINKS) -o $(NAME) $^ $(LIBFT)libft.a
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT)libft.a -I $(HEADER) -o $(NAME) -L /home/mkerkeni/42cursus/42_cursus_cub3d_project/minilibx-linux -lmlx -lXext -lX11 -lm
 	@echo "	Compiled !"
 
 clean:
