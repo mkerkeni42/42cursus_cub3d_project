@@ -1,50 +1,59 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/03/05 14:33:00 by mkerkeni          #+#    #+#              #
-#    Updated: 2024/03/06 21:46:23 by mkerkeni         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
-NAME = cub3d
+#-------------------COLORS------------------#
+DEF = \033[0m
+BOLD = \033[1m
+UNDERLINE = \033[4m
+RED = \033[31;2m
+BLACK = \033[38;5;238m
+BLUE = \033[38;5;153m
+GREEN = \033[38;5;48m
+YELLOW = \033[38;5;226m
+ORANGE = \033[38;5;202m
+PINK = \033[38;5;198m
+PURPLE = \033[38;5;147m
+UP = UP = \033[A
 
-LIBFT = Libft/
-
-CC = gcc
-
-CFLAGS = -Wall -Wextra -Werror
-
-#CFLAGS += -fsanitize=address -g3
-
-HEADER = ./
-
-SRCS = 
+#-------------------SRCS--------------------#
+SRCS	=	main.c \
 
 OBJS = $(SRCS:.c=.o)
 
-%.o:%.c
-	@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+#------------------COMPILE------------------#
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra
+ifdef DEBUG
+CFLAGS += -fsanitize=address -g3
+endif
 
-all: $(NAME)
+.c.o:
+	@$(CC) $(CFLAGS) -c -I ./inc/ $< -o $(<:.c=.o)
+
+#------------------RULES---------------------#
+NAME = cub3d
+
+all : $(NAME)
 
 $(NAME): $(OBJS)
-	@echo "	Compilation in progress..."
-	@$(MAKE) -C $(LIBFT)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT)libft.a -I $(HEADER) -o $(NAME) -L /home/mkerkeni/42cursus/42_cursus_cub3d_project/minilibx-linux -lmlx -lXext -lX11 -lm
-	@echo "	Compiled !"
+	@echo ""
+	@echo "	$(BOLD)$(PINK)$(UNDERLINE)Compiling...$(DEF)  $(PURPLE)$(BOLD)Cub3d$(DEF) ⏳"
+	@$(MAKE) -C ./Libft/
+	@$(CC) $(CFLAGS) $(OBJS) ./Libft/libft.a -o $(NAME) -L ./minilibx-linux -lmlx -lXext -lX11 -lm
+	@clear
+	@echo "	$(YELLOW)$(BOLD)Compiled ! ✨$(DEF)"
+
+debug: fclean
+	@$(MAKE) DEBUG=1
 
 clean:
-	@rm -f $(OBJS)
-	@$(MAKE) clean -C $(LIBFT)
+	@$(MAKE) clean -C ./Libft/
+	@rm -rf $(OBJS)
+	@echo "	❌ $(BOLD)$(RED)Deleted file .o$(DEF)"
 
 fclean: clean
-	@rm -f $(NAME)
-	@rm -f Libft/libft.a
+	@rm -rf ./Libft/libft.a
+	@rm -rf $(NAME)
+	@echo "	❌ $(BOLD)$(RED)Deleted file .a$(DEF)"
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re debug
