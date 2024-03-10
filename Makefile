@@ -15,6 +15,10 @@ UP = UP = \033[A
 
 #-------------------SRCS--------------------#
 SRCS	=	main.c \
+			parsing/parsing.c \
+			parsing/parsing_elem.c \
+			parsing/parsing_param.c \
+			parsing/parsing_map.c \
 
 OBJS = $(SRCS:.c=.o)
 
