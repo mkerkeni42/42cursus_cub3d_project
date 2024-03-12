@@ -15,12 +15,20 @@ UP = UP = \033[A
 
 #-------------------SRCS--------------------#
 SRCS	=	main.c \
+			parsing/parsing.c \
+			parsing/parsing_elem.c \
+			parsing/parsing_param.c \
+			parsing/parsing_map.c \
+			cub3d_utils.c \
+			deal_hook.c \
+			raycasting.c \
+			dda_algorithm.c
 
 OBJS = $(SRCS:.c=.o)
 
 #------------------COMPILE------------------#
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g3
 ifdef DEBUG
 CFLAGS += -fsanitize=address -g3
 endif
