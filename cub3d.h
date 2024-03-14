@@ -6,7 +6,7 @@
 /*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:00:05 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/09 15:07:36 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/14 11:26:18 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct s_cube {
 	char	**map;
 	char	**file;
 	char	**elem;
+	int		floor[3];
+	int		ceiling[3];
 	int		nb_line;
 	int		i;
 	int		no;
@@ -37,9 +39,14 @@ void	ft_handlerror(int x);
 
 /*=========================PARSING=========================*/
 
-void	parsing(t_cube *cube, char *av);
+void	cpy_cub(t_cube *cube, char *av);
 void	cpy_elem(t_cube *cube);
 void	check_param(t_cube *cube);
 void	cpy_map(t_cube *cube);
+void	check_file(t_cube *cube);
+
+/*==========================UTILS==========================*/
+
+void	free_array(char **array);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 09:22:39 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/03/09 15:11:00 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/14 10:32:01 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	set_elem(t_cube *cube)
+static void	set_elem(t_cube *cube)
 {
 	cube->no = 0;
 	cube->so = 0;
@@ -22,8 +22,9 @@ void	set_elem(t_cube *cube)
 	cube->c = 0;
 }
 
-static int	check_double(t_cube *cube, char *str)
+static int	check_double(t_cube *cube, char *str, char **tmp)
 {
+	free_array(tmp);
 	if (!ft_strcmp(str, "NO"))
 		cube->no++;
 	else if (!ft_strcmp(str, "SO"))
@@ -48,17 +49,18 @@ static int	pars_elem(t_cube *cube)
 
 	tmp = ft_split(cube->file[cube->i], ' ');
 	if (!ft_strncmp(tmp[0], "NO", ft_strlen(tmp[0])))
-		return (check_double(cube, "NO"));
+		return (check_double(cube, "NO", tmp));
 	else if (!ft_strncmp(tmp[0], "SO", ft_strlen(tmp[0])))
-		return (check_double(cube, "SO"));
+		return (check_double(cube, "SO", tmp));
 	else if (!ft_strncmp(tmp[0], "WE", ft_strlen(tmp[0])))
-		return (check_double(cube, "WE"));
+		return (check_double(cube, "WE", tmp));
 	else if (!ft_strncmp(tmp[0], "EA", ft_strlen(tmp[0])))
-		return (check_double(cube, "EA"));
+		return (check_double(cube, "EA", tmp));
 	else if (!ft_strncmp(tmp[0], "F", ft_strlen(tmp[0])))
-		return (check_double(cube, "F"));
+		return (check_double(cube, "F", tmp));
 	else if (!ft_strncmp(tmp[0], "C", ft_strlen(tmp[0])))
-		return (check_double(cube, "C"));
+		return (check_double(cube, "C", tmp));
+	free_array(tmp);
 	return (1);
 }
 
@@ -79,8 +81,9 @@ void	cpy_elem(t_cube *cube)
 			cube->elem[j] = ft_strcpy(cube->elem[j], cube->file[cube->i]);
 		}
 	}
+	cube->elem[cube->i] = '\0';
 	if (j != 5)
 		ft_handlerror(1);
 	check_param(cube);
-	cpy_map(cube);
+	check_file(cube);
 }

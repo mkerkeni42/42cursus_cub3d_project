@@ -6,7 +6,7 @@
 /*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:47:07 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/03/09 15:09:32 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/14 11:23:24 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,5 @@ void	cpy_cub(t_cube *cube, char *av)
 	while (cube->file[i])
 		cube->file[++i] = get_next_line(fd);
 	close(fd);
-}
-
-void	parsing(t_cube *cube, char *av)
-{
-//	int	i;
-
-	//i = -1;
-	cpy_cub(cube, av);
 	cpy_elem(cube);
-	
-	// while (cube->elem[++i])
-	// 	printf("%s", cube->elem[i]);
 }
