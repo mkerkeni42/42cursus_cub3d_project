@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:59:27 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/12 11:26:34 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/14 14:15:19 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int	main(int ac,char **av)
 	if (ac != 2)
 		ft_handlerror(0);
 	parsing(&cube, av[1]);
-	raycasting(&game, &cube);
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, HEIGHT, WIDTH, "Cub3D");
+	raycasting(&game, &cube);
 	mlx_key_hook(game.win, deal_key, &game);
 	mlx_hook(game.win, 17, 0, ft_exit_game, &game);
 	mlx_loop(game.mlx);

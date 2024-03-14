@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:00:05 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/12 15:41:39 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/14 14:54:33 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,27 +24,38 @@
 # define HEIGHT 1280
 # define WIDTH 1024
 
+typedef struct	s_color
+{
+	int red;
+	int	green;
+	int	blue;	
+}				t_color;
+
 typedef struct	s_map
 {
-	double		camera_x;
-	double		rayDir_x;
-	double		rayDir_y;
+	double	camera_x;
+	double	rayDir_x;
+	double	rayDir_y;
 	//wich box of the mp we are int
-	int 		map_x;
-	int			map_y;
+	int 	map_x;
+	int		map_y;
 	//length of ray from current position to nex x or y side
-	double		sideDist_x;
-	double		sideDist_y;
+	double	sideDist_x;
+	double	sideDist_y;
 	//length of ray from one x or y side to next x or y side
-	double		DeltaDist_x;
-	double		DeltaDist_y;
-	double		perpWallDist;
+	double	DeltaDist_x;
+	double	DeltaDist_y;
+	double	perpWallDist;
 	//what direction to step in x or y direction (either +1 or -1)
-	int			step_x;
-	int			step_y;
+	int		step_x;
+	int		step_y;
 	
-	int			hit; //was there a wall hit ?
-	int			side; // was a NS or a EW wall hit?
+	int		hit; //was there a wall hit ?
+	int		side; // was a NS or a EW wall hit?
+
+	int		wall_height;
+	int		drawStart;
+	int		drawEnd;
 }				t_map;
 
 typedef struct s_cube
@@ -76,6 +87,8 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
+	void		*img;
+	int 		*img_data;
 	t_vector	pos;
 	double		time;
 	double		old_time;
@@ -96,5 +109,8 @@ int		ft_exit_game(t_game *game, int x);
 void	draw_lines_dda(t_game *game, t_map *map, t_cube *cube);
 void	get_dist_to_wall(t_game *game, t_map *map, t_cube *cube);
 void	get_wall_height(t_game *game, t_map *map, t_cube *cube);
+void	set_wall_color(t_game *game, t_map *map, int x);
+int		get_color(int red, int green, int blue);
+void	draw_vertical_lines(t_game *game, t_map * map, int x, int color)
 
 #endif

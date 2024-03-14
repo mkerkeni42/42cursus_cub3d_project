@@ -22,7 +22,8 @@ SRCS	=	main.c \
 			cub3d_utils.c \
 			deal_hook.c \
 			raycasting.c \
-			dda_algorithm.c
+			dda_algorithm.c \
+			colors.c
 
 OBJS = $(SRCS:.c=.o)
 

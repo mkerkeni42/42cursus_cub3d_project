@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:59:33 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/12 15:42:00 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/14 15:16:03 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,6 @@ static void	init_map_vars(t_map *map, t_game *game)
 		map->DeltaDist_y = fabs(1 / map->rayDir_y);
 }
 
-static void	get_rayDir(t_game *game, t_map *map)
-{
-	int	x;
-
-	x  = 0;
-	while (x++ < WIDTH)
-	{
-		map->camera_x = 2 * x / (double)WIDTH - 1;
-		map->rayDir_x = game->pos.dir_x + game->pos.plane_x * map->camera_x;
-		map->rayDir_y = game->pos.dir_y + game->pos.plane_y * map->camera_x;
-	}
-}
-
 static void	init_vectors(t_game *game)
 {
 	game->pos.pos_x = 22;
@@ -73,7 +60,7 @@ static void	init_vectors(t_game *game)
 	game->pos.dir_x = -1;
 	game->pos.dir_y = 0;
 	game->pos.plane_x = 0;
-	game->pos.plane_y = 0.66;
+	game->pos.plane_y = -0.66;
 	game->time = 0;
 	game->old_time = 0;
 }
@@ -82,13 +69,28 @@ void	raycasting(t_game *game, t_cube *cube)
 {
 	t_map	map;
 	int		x;
+	int		*img_data_ptr;
+	int		bits_per_pixel;
+    int		size_line;
+    int		endian;
 
-	x = 0;
+
+	x = -1;
 	init_vectors(&game);
-	get_rayDir(&game, &map);
-	init_map_vars(&map, &game);
-	get_step_and_sideDist(game, &map);
-	draw_lines_dda(game, &map, cube);
-	get_dist_to_wall(game, &map, cube);
-	get_wall_height(game, &map, cube);
+	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	game->img_data = (int *)mlx_get_data_addr(game->img, &bits_per_pixel, &size_line, &endian);
+	while (++x < WIDTH)
+	{
+		map.camera_x = 2 * x / (double)WIDTH - 1;
+		map.rayDir_x = game->pos.dir_x + game->pos.plane_x * map.camera_x;
+		map.rayDir_y = game->pos.dir_y + game->pos.plane_y * map.camera_x;
+		init_map_vars(&map, &game);
+		get_step_and_sideDist(game, &map);
+		draw_lines_dda(game, &map, cube);
+		get_dist_to_wall(game, &map, cube);
+		get_wall_height(game, &map, cube);
+		set_wall_color(&map, cube, x);
+	}
+	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+	mlx_destroy_image(game->mlx, game->img);
 }
