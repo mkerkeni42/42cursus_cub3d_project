@@ -15,15 +15,15 @@ UP = UP = \033[A
 
 #-------------------SRCS--------------------#
 SRCS	=	main.c \
+			cub3d_utils.c \
 			parsing/parsing.c \
 			parsing/parsing_elem.c \
 			parsing/parsing_param.c \
 			parsing/parsing_map.c \
-			cub3d_utils.c \
-			deal_hook.c \
-			raycasting.c \
-			dda_algorithm.c \
-			colors.c
+			execution/deal_hook.c \
+			execution/raycasting.c \
+			execution/dda_algorithm.c \
+			execution/colors.c
 
 OBJS = $(SRCS:.c=.o)
 

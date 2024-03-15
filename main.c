@@ -6,42 +6,87 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:59:27 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/14 14:15:19 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/15 12:54:43 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_handlerror(int x)
+int	check_file_name(char *file_name)
 {
-	if (x == 0)
-		printf("Error\nWrong number of arguments\n");
-	if (x == 1)
-		printf("Error\nWrong number of elements\n");
-	if (x == 2)
-		printf("Error\nFile not found\n");
-	if (x == 3)
-		printf("Error\nColor does not exist\n");
-	if (x == 4)
-		printf("Error\nOnly numbers are expected for RGB\n");
-	if (x == 5)
-		printf("Error\n3 parameters are expected for RGB\n");
-	if (x == 6)
-		printf("Error\nBad characters\n");
-	exit(1);
+	char	*dot;
+
+	dot = ft_strchr(file_name, '.');
+	if (!dot)
+		return (1);
+	if (ft_strlen(dot) != 4)
+		return (1);
+	else
+	{
+		if (dot[1] != 'c' || dot[2] != 'u' || dot[3] != 'b')
+			return (1);
+	}
+	return (0);
 }
 
-int	main(int ac,char **av)
+static void	remove_nl_map(t_cube *cube)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	j = 0;
+	while (cube->map[++i])
+	{
+		j = 0;
+		while (cube->map[i][j] && cube->map[i][j] != '\n')
+			j++;
+		if (cube->map[i][j] == '\n')
+			cube->map[i][j] = '\0';
+	}
+}
+
+static int	get_pos(t_cube *cube, int x)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	j = -1;
+	while (cube->map[++i])
+	{
+		j = -1;
+		while (cube->map[i][++j])
+		{
+			if (cube->map[i][j] == cube->pos)
+			{
+				if (x == 0)
+					return (j);
+				else
+					return (i);
+			}
+		}
+	}
+	return (EXIT_FAILURE);
+}
+
+int	main(int ac, char **av)
 {
 	t_cube	cube;
 	t_game	game;
-	
+	t_map	map;
+
 	if (ac != 2)
 		ft_handlerror(0);
-	parsing(&cube, av[1]);
+	if (check_file_name(av[1]))
+		ft_handlerror(9);
+	cpy_cub(&cube, av[1]);
+	remove_nl_map(&cube);
+	map.pos.x = (double)get_pos(&cube, 1);
+	map.pos.y = (double)get_pos(&cube, 0);
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, HEIGHT, WIDTH, "Cub3D");
-	raycasting(&game, &cube);
+	raycasting(&game, &map, &cube);
 	mlx_key_hook(game.win, deal_key, &game);
 	mlx_hook(game.win, 17, 0, ft_exit_game, &game);
 	mlx_loop(game.mlx);

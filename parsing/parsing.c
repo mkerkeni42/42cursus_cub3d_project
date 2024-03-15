@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:47:07 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/03/09 15:09:32 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/15 12:38:26 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	size_of_file(t_cube *cube, char *av)
 	cube->nb_line = 0;
 	fd = open(av, O_RDONLY);
 	if (fd == -1)
-		ft_handlerror(3);
+		ft_handlerror(2);
 	str = get_next_line(fd);
 	while (str)
 	{
@@ -46,16 +46,5 @@ void	cpy_cub(t_cube *cube, char *av)
 	while (cube->file[i])
 		cube->file[++i] = get_next_line(fd);
 	close(fd);
-}
-
-void	parsing(t_cube *cube, char *av)
-{
-//	int	i;
-
-	//i = -1;
-	cpy_cub(cube, av);
 	cpy_elem(cube);
-	
-	// while (cube->elem[++i])
-	// 	printf("%s", cube->elem[i]);
 }

@@ -6,60 +6,73 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:19:56 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/03/12 13:40:59 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/15 12:38:26 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-long int	ft_atol(const char *str)
+void	get_color_arr(t_cube *cube, char **line, int x)
 {
-	int			i;
-	long int	res;
-	int			sign;
-
-	sign = 1;
-	i = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
-	}
-	res = 0;
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		res = res * 10 + str[i] - '0';
-		i++;
-	}
-	return (res * sign);
-}
-
-void	check_rgb(char *tmp)
-{
-	char	**rgb;
 	int		i;
 	int		j;
-	int		nb;
+	int		k;
+	char	tmp[4];
 
-	rgb = ft_split(tmp, ',');
+	if (line[0][0] == 'F')
+		x = 0;
+	else if (line[0][0] == 'C')
+		x = 1;
+	i = -1;
+	while (line[++i])
+	{
+		j = -1;
+		k = -1;
+		while (line[i][++j])
+		{
+			if (ft_isdigit(line[i][j]))
+				tmp[++k] = line[i][j];
+		}
+		tmp[k + 1] = '\0';
+		if (x == 0)
+			cube->floor[i] = ft_atoi(tmp);
+		else if (x == 1)
+			cube->ceiling[i] = ft_atoi(tmp);
+	}
+}
+
+static int	check_value(char *rgb)
+{
+	int	i;
+	int	nb;
+
+	nb = 0;
 	i = -1;
 	while (rgb[++i])
 	{
-		j = -1;
-		nb = 0;
-		while (rgb[i][++j])
-		{
-			if ((rgb[i][j] > 8 && rgb[i][j] < 14) || rgb[i][j] == 32)
-				break ;
-			if (!ft_isdigit(rgb[i][j]))
-				ft_handlerror(4);
-			else if (ft_isdigit(rgb[i][j]))
-				nb++;
-		}
-		if (nb > 3 || ft_atol(rgb[i]) > 255)
+		if (nb > 1 && rgb[i] == ' ')
+			ft_handlerror(4);
+		if (rgb[i] == ' ' || rgb[i] == '\n' || (rgb[i] == 'F' && i == 0) \
+			|| (rgb[i] == 'C' && i == 0))
+			continue ;
+		if (!ft_isdigit(rgb[i]))
+			ft_handlerror(4);
+		else if (ft_isdigit(rgb[i]))
+			nb++;
+	}
+	return (nb);
+}
+
+void	check_rgb(char **rgb)
+{
+	int		i;
+	int		nb;
+
+	i = -1;
+	while (rgb[++i])
+	{
+		nb = check_value(rgb[i]);
+		if (nb > 3 || ft_atoi(rgb[i]) > 255)
 			ft_handlerror(3);
 	}
 	if (i != 3)
@@ -74,9 +87,7 @@ void	check_path(char *path)
 	fd = -1;
 	tmp = malloc(sizeof(char) * ft_strlen(path));
 	while (path[++fd] && path[fd] != '\n')
-	{
 		tmp[fd] = path[fd];
-	}
 	tmp[fd] = '\0';
 	fd = open(tmp, O_RDONLY);
 	if (fd == -1)
@@ -95,8 +106,17 @@ void	check_param(t_cube *cube)
 	{
 		tmp = ft_split(cube->elem[i], ' ');
 		if (ft_strlen(tmp[0]) == 2)
+		{
 			check_path(tmp[1]);
+			free_array(tmp);
+		}
 		else
-			check_rgb(tmp[1]);
+		{
+			free_array(tmp);
+			tmp = ft_split(cube->elem[i], ',');
+			check_rgb(tmp);
+			get_color_arr(cube, tmp, 0);
+			free_array(tmp);
+		}
 	}
 }

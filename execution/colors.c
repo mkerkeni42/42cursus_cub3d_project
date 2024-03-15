@@ -6,31 +6,42 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:19:51 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/14 15:20:11 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/15 13:26:43 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
-void	draw_vertical_lines(t_game *game, t_map * map, int x, int color)
+void	my_pixel_put(t_game *game, int x, int y, int color)
+{
+    char    *pixel;
+
+	pixel = game->img_data + (y * game->size_line + x * (game->bits_per_pixel / 8));
+    *(int *)pixel = color;
+}
+
+void	draw_vertical_lines(t_game *game, t_map* map, int x, int color)
 {
 	int	y;
-	
-	y = map->drawStart;
-	while (y++ <= map->drawEnd)
-		game->img_data[y * WIDTH + x] = color;
+
+    printf("color = %d\n", color);
+	printf("draw start = %d\n", map->draw_start);
+	printf("draw end = %d\n", map->draw_end);
+	y = map->draw_start;
+	while (y++ <= map->draw_end)
+		my_pixel_put(game, x, y, color);
 }
 
 int	get_color(int red, int green, int blue)
 {
-	t_color	RGBcolor;
+	t_color	rgb_color;
 	int		color;	
 
-	RGBcolor.red = red;
-	RGBcolor.green = green;
-	RGBcolor.blue = blue;
-	color = (RGBcolor.red << 16) | (RGBcolor.green << 8) | RGBcolor.blue;
-	return(color);	
+	rgb_color.red = red;
+	rgb_color.green = green;
+	rgb_color.blue = blue;
+	color = (rgb_color.red << 16) | (rgb_color.green << 8) | rgb_color.blue;
+	return (color);
 }
 
 void	set_wall_color(t_game *game, t_map *map, int x)
@@ -40,5 +51,5 @@ void	set_wall_color(t_game *game, t_map *map, int x)
 	color = get_color(255, 0, 0);
 	if (map->side == 1)
 		color = color / 2;
-	draw_vertical_lines(game, map, x, color);	
+	draw_vertical_lines(game, map, x, color);
 }
