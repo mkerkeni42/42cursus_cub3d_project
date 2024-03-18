@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:39:24 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/15 12:38:26 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/18 09:44:33 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,7 @@ void	ft_handlerror(int x)
 		write(2, "Error\nThere is more one position !\n", 36);
 	if (x == 9)
 		write(2, "Error\nWrong file name extension !\n", 35);
+	if (x == 10)
+		write(2, "Error\nThere is not start position\n", 35);
 	exit(EXIT_FAILURE);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:47:30 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/03/15 12:38:26 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:14:46 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,14 @@ void	check_map(t_cube *cube)
 {
 	int	i;
 	int	j;
-	int	bool;
 
-	bool = 0;
 	i = -1;
 	while (cube->map[++i])
 	{
 		j = -1;
 		while (cube->map[i][++j])
 		{
-			if (bool > 1)
-				ft_handlerror(8);
-			if (cube->map[i][j] == 'N' || cube->map[i][j] == 'S' \
-				|| cube->map[i][j] == 'E' || cube->map[i][j] == 'W')
-			{
-				bool++;
-				cube->pos = cube->map[i][j];
-			}
+			check_pos(cube, cube->map[i][j]);
 			if (check_value(cube->map[i][j], 0) && cube->map[i][j] != ' ' \
 				&& cube->map[i][j] != '\n')
 				ft_handlerror(6);
@@ -63,6 +54,8 @@ void	check_map(t_cube *cube)
 				check_around(cube, i, j);
 		}
 	}
+	if (cube->bool == 0)
+		ft_handlerror(10);
 }
 
 void	cpy_map(t_cube *cube)

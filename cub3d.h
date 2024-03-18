@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:00:05 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/15 14:30:57 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:11:21 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_cube
 	int		floor[3];
 	int		ceiling[3];
 	int		nb_line;
+	int		bool;
 	int		i;
 	int		no;
 	int		so;
@@ -98,6 +99,8 @@ void	cpy_elem(t_cube *cube);
 void	check_param(t_cube *cube);
 void	cpy_map(t_cube *cube);
 void	check_file(t_cube *cube);
+void	check_pos(t_cube *cube, int c);
+void	free_tab_struct(t_cube *cube);
 
 /*==========================UTILS==========================*/
 
