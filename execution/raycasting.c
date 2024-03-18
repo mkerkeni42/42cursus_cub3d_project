@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:59:33 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/15 15:04:41 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:00:52 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	get_step_and_side_dist(t_map *map)
 	{
 		map->step_x = -1;
 		map->side_dist.x = (map->pos.x - map->map_x) * map->delta_dist.x ;
-		printf("mapx = %d || posx = %f || deltadistx = %f\n", map->map_x, map->pos.x, map->delta_dist.x);
 	}
 	else
 	{
@@ -78,6 +77,10 @@ void	raycasting(t_game *game, t_map *map, t_cube *cube)
 		map->ray_dir.y = map->dir.y + (map->plane.y * map->camera_x);
 		init_map_vars(map);
 		get_step_and_side_dist(map);
+		printf("mapx = %d || posx = %f\n", map->map_x, map->pos.x);
+		printf("mapy = %d || posy = %f\n", map->map_y, map->pos.y);
+		printf("ray_dir x = %f\n", map->ray_dir.x);
+		printf("ray_dir y = %f\n", map->ray_dir.y);
 		printf("delta_dist x = %f\n", map->delta_dist.x);
 		printf("delta_dist y = %f\n", map->delta_dist.y);
 		printf("side_dist x = %f\n", map->side_dist.x);

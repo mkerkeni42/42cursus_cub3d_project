@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:47:07 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/03/15 12:38:26 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/18 09:27:52 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	cpy_cub(t_cube *cube, char *av)
 	cube->file = ft_calloc(sizeof(char *), size_of_file(cube, av));
 	fd = open(av, O_RDONLY);
 	if (fd == -1)
-		ft_handlerror(3);
+		ft_handlerror(2);
 	i = 0;
 	cube->file[i] = get_next_line(fd);
 	while (cube->file[i])
