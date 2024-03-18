@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:19:51 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/15 13:26:43 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/18 15:25:18 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	draw_vertical_lines(t_game *game, t_map* map, int x, int color)
 {
 	int	y;
 
-    printf("color = %d\n", color);
-	printf("draw start = %d\n", map->draw_start);
-	printf("draw end = %d\n", map->draw_end);
+   // printf("color = %d\n", color);
+	//printf("draw start = %d\n", map->draw_start);
+	//printf("draw end = %d\n", map->draw_end);
 	y = map->draw_start;
 	while (y++ <= map->draw_end)
 		my_pixel_put(game, x, y, color);
