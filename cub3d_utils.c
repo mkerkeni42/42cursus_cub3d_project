@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:39:24 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/15 12:38:26 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:28:53 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,12 @@ void	ft_handlerror(int x)
 	if (x == 6)
 		write(2, "Error\nBad characters !\n", 24);
 	if (x == 7)
-		write(2, "Error\narray is not closed !\n", 29);
+		write(2, "Error\nMap is not closed !\n", 27);
 	if (x == 8)
-		write(2, "Error\nThere is more one position !\n", 36);
+		write(2, "Error\nThere is more than one position !\n", 41);
 	if (x == 9)
 		write(2, "Error\nWrong file name extension !\n", 35);
+	if (x == 10)
+		write(2, "Error\nThere is no start position !\n", 36);
 	exit(EXIT_FAILURE);
 }

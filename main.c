@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:59:27 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/15 12:54:43 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:16:02 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,6 @@ int	main(int ac, char **av)
 	mlx_key_hook(game.win, deal_key, &game);
 	mlx_hook(game.win, 17, 0, ft_exit_game, &game);
 	mlx_loop(game.mlx);
+	free_tab_struct(&cube);
 	return (0);
 }

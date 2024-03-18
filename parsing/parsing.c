@@ -6,11 +6,28 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:47:07 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/03/18 09:27:52 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:17:52 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	free_tab_struct(t_cube *cube)
+{
+	free_array(cube->elem);
+	free_array(cube->file);
+	free_array(cube->map);
+}
+
+void	check_pos(t_cube *cube, int c)
+{
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		cube->bool++;
+	if (cube->bool > 1)
+		ft_handlerror(8);
+	if (cube->bool == 1 && (c == 'N' || c == 'S' || c == 'E' || c == 'W'))
+		cube->pos = c;
+}
 
 int	size_of_file(t_cube *cube, char *av)
 {

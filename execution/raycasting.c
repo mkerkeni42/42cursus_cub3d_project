@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:59:33 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/18 10:00:52 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/18 10:50:04 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	raycasting(t_game *game, t_map *map, t_cube *cube)
 		map->camera_x = (2 * x) / ((double)WIDTH - 1);
 		map->ray_dir.x = map->dir.x + (map->plane.x * map->camera_x);
 		map->ray_dir.y = map->dir.y + (map->plane.y * map->camera_x);
+		printf("cameraX = %f\n", map->camera_x);
 		init_map_vars(map);
 		get_step_and_side_dist(map);
 		printf("mapx = %d || posx = %f\n", map->map_x, map->pos.x);
