@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:59:33 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/18 15:15:48 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:18:11 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,13 @@ void	raycasting(t_game *game, t_map *map, t_cube *cube)
 	while (++x < WIDTH)
 	{
 		map->camera_x = 2 * x / (double)WIDTH - 1;
-		printf("camerax = %f\n", map->camera_x);
 		map->ray_dir.x = map->dir.x + map->plane.x * map->camera_x;
 		map->ray_dir.y = map->dir.y + map->plane.y * map->camera_x;
 		init_map_vars(map);
 		get_step_and_side_dist(map);
-		printf("delta_dist x = %f\n", map->delta_dist.x);
-		printf("delta_dist y = %f\n", map->delta_dist.y);
-		printf("side_dist x = %f\n", map->side_dist.x);
-		printf("side_dist y = %f\n", map->side_dist.y);
 		draw_lines_dda(map, cube);
 		get_dist_to_wall(map);
-		printf("wall dist = %f\n", map->wall_dist);
 		get_wall_height(map);
-		printf("wall height = %d\n", map->wall_height);
 		set_wall_color(game, map, x);
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 15:24:46 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/18 15:39:13 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:14:20 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 void	get_wall_height(t_map *map)
 {
 	map->wall_height = (int)(HEIGHT / map->wall_dist);
-	map->draw_start = -map->wall_height / 2 + HEIGHT / 2;
+	map->draw_start = (-map->wall_height / 2) + (HEIGHT / 2);
 	if (map->draw_start < 0)
 		map->draw_start = 0;
-	map->draw_end = map->wall_height / 2 + HEIGHT / 2;
+	map->draw_end = (map->wall_height / 2) + (HEIGHT / 2);
 	if (map->draw_end >= HEIGHT)
 		map->draw_end = HEIGHT - 1;
 }
@@ -48,7 +48,7 @@ void	draw_lines_dda(t_map *map, t_cube *cube)
 			map->map_y += map->step_y;
 			map->side = 1;
 		}
-		if (cube->map[map->map_y][map->map_x] != '0')
+		if (cube->map[map->map_y][map->map_x] == '1')
 			map->hit = 1;
 	}
 }

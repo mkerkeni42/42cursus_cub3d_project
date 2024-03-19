@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:19:51 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/18 15:25:18 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:24:27 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,23 @@
 
 void	my_pixel_put(t_game *game, int x, int y, int color)
 {
-    char    *pixel;
+	char	*pixel;
 
-	pixel = game->img_data + (y * game->size_line + x * (game->bits_per_pixel / 8));
-    *(int *)pixel = color;
+	pixel = game->img_data + (y * game->size_line + x \
+	* (game->bits_per_pixel / 8));
+	*(int *)pixel = color;
 }
 
-void	draw_vertical_lines(t_game *game, t_map* map, int x, int color)
+void	draw_vertical_lines(t_game *game, t_map *map, int x, int color)
 {
 	int	y;
 
-   // printf("color = %d\n", color);
-	//printf("draw start = %d\n", map->draw_start);
-	//printf("draw end = %d\n", map->draw_end);
 	y = map->draw_start;
-	while (y++ <= map->draw_end)
+	while (y <= map->draw_end)
+	{
 		my_pixel_put(game, x, y, color);
+		y++;
+	}
 }
 
 int	get_color(int red, int green, int blue)
@@ -50,6 +51,6 @@ void	set_wall_color(t_game *game, t_map *map, int x)
 
 	color = get_color(255, 0, 0);
 	if (map->side == 1)
-		color = color / 2;
+		color = color / 1.5;
 	draw_vertical_lines(game, map, x, color);
 }

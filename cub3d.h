@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:00:05 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/18 13:09:57 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:10:14 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <fcntl.h>
 # include <math.h>
 
-# define HEIGHT 1320
-# define WIDTH 720
+# define HEIGHT 720
+# define WIDTH 1320
 
 typedef struct s_color
 {
