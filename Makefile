@@ -22,6 +22,7 @@ SRCS	=	main.c \
 			parsing/parsing_map.c \
 			execution/deal_hook.c \
 			execution/raycasting.c \
+			execution/init_vectors.c \
 			execution/dda_algorithm.c \
 			execution/colors.c
 

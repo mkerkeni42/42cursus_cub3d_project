@@ -6,7 +6,7 @@
 /*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:59:27 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/18 11:51:13 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:47:01 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,11 @@ int	main(int ac, char **av)
 		ft_handlerror(9);
 	cpy_cub(&cube, av[1]);
 	remove_nl_map(&cube);
-	map.pos.x = (double)get_pos(&cube, 1);
-	map.pos.y = (double)get_pos(&cube, 0);
+	map.card_point = cube.pos;
+	map.pos.x = (double)get_pos(&cube, 0) + 0.5;
+	map.pos.y = (double)get_pos(&cube, 1) + 0.5;
 	game.mlx = mlx_init();
-	game.win = mlx_new_window(game.mlx, HEIGHT, WIDTH, "Cub3D");
+	game.win = mlx_new_window(game.mlx, WIDTH, HEIGHT, "Cub3D");
 	raycasting(&game, &map, &cube);
 	mlx_key_hook(game.win, deal_key, &game);
 	mlx_hook(game.win, 17, 0, ft_exit_game, &game);

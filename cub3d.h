@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:00:05 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/18 10:11:21 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/19 10:10:14 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <fcntl.h>
 # include <math.h>
 
-# define HEIGHT 1320
-# define WIDTH 720
+# define HEIGHT 720
+# define WIDTH 1320
 
 typedef struct s_color
 {
@@ -60,6 +60,7 @@ typedef struct s_map
 	int			wall_height;
 	int			draw_start;
 	int			draw_end;
+	char		card_point;
 }				t_map;
 
 typedef struct s_game
@@ -114,6 +115,8 @@ void	print_array(char **array);
 int		deal_key(int key, t_game *game);
 
 void	raycasting(t_game *game, t_map *map, t_cube *cube);
+void	init_dir(t_map *map);
+void	init_plane(t_map *map);
 void	draw_lines_dda(t_map *map, t_cube *cube);
 void	get_dist_to_wall(t_map *map);
 void	get_wall_height(t_map *map);
