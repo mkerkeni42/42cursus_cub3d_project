@@ -6,7 +6,7 @@
 /*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:59:27 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/19 10:47:01 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/21 09:30:45 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,14 @@ static int	get_pos(t_cube *cube, int x)
 	return (EXIT_FAILURE);
 }
 
+static void	init_vars(t_game *game)
+{
+	game->map->pos.x = (double)get_pos(game->cube, 0) + 0.5;
+	game->map->pos.y = (double)get_pos(game->cube, 1) + 0.5;
+	init_dir(game->map);
+	init_plane(game->map);
+}
+
 int	main(int ac, char **av)
 {
 	t_cube	cube;
@@ -83,12 +91,13 @@ int	main(int ac, char **av)
 	cpy_cub(&cube, av[1]);
 	remove_nl_map(&cube);
 	map.card_point = cube.pos;
-	map.pos.x = (double)get_pos(&cube, 0) + 0.5;
-	map.pos.y = (double)get_pos(&cube, 1) + 0.5;
+	game.map = &map;
+	game.cube = &cube;
+	init_vars(&game);
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, WIDTH, HEIGHT, "Cub3D");
-	raycasting(&game, &map, &cube);
-	mlx_key_hook(game.win, deal_key, &game);
+	raycasting(&game);
+	mlx_hook(game.win, 2, 1L << 0, &deal_key, &game);
 	mlx_hook(game.win, 17, 0, ft_exit_game, &game);
 	mlx_loop(game.mlx);
 	free_tab_struct(&cube);

@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:00:05 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/19 10:10:14 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/19 13:05:57 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@
 
 # define HEIGHT 720
 # define WIDTH 1320
+
+# define ESC 65307
+# define ROT_RIGHT 65361
+# define ROT_LEFT 65363
+# define FRONT 119
+# define BACK 115
+# define LEFT 97
+# define RIGHT 100
 
 typedef struct s_color
 {
@@ -44,35 +52,20 @@ typedef struct s_map
 	t_vector	plane;
 	double		camera_x;
 	t_vector	ray_dir;
-	//wich box of the mp we are int
 	int			map_x;
 	int			map_y;
-	//length of ray from current position to nex x or y side
 	t_vector	side_dist;
-	//length of ray from one x or y side to next x or y side
 	t_vector	delta_dist;
 	double		wall_dist;
-	//what direction to step in x or y direction (either +1 or -1)
 	int			step_x;
 	int			step_y;
-	int			hit; //was there a wall hit ?
-	int			side; // was a NS or a EW wall hit?
+	int			hit;
+	int			side;
 	int			wall_height;
 	int			draw_start;
 	int			draw_end;
 	char		card_point;
 }				t_map;
-
-typedef struct s_game
-{
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*img_data;
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-}				t_game;
 
 typedef struct s_cube
 {
@@ -92,6 +85,19 @@ typedef struct s_cube
 	int		c;
 	char	pos;
 }			t_cube;
+
+typedef struct s_game
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+	char	*img_data;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+	t_map	*map;
+	t_cube	*cube;
+}				t_game;
 
 /*=========================PARSING=========================*/
 
@@ -113,8 +119,11 @@ void	print_array(char **array);
 /*========================EXECUTION========================*/
 
 int		deal_key(int key, t_game *game);
-
-void	raycasting(t_game *game, t_map *map, t_cube *cube);
+void	go_front(t_game *game);
+void	go_back(t_game *game);
+void	go_right(t_game *game);
+void	go_left(t_game *game);
+void	raycasting(t_game *game);
 void	init_dir(t_map *map);
 void	init_plane(t_map *map);
 void	draw_lines_dda(t_map *map, t_cube *cube);
