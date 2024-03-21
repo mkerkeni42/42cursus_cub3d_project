@@ -1,10 +1,10 @@
-NO ./map.cub
-SO ./map.cub
-WE ./map.cub
-EA ./map.cub
+NO ./sprites/north.xpm
+SO ./sprites/south.xpm
+WE ./sprites/west.xpm
+EA ./sprites/east.xpm
 
-F 255,100,0
-C 225,30,0
+F 255,255,255
+C 135,206,250
 
 
 

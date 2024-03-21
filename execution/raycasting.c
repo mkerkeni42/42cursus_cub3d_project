@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:59:33 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/19 12:56:08 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:12:27 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	raycasting(t_game *game)
 	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	game->img_data = mlx_get_data_addr(game->img, \
 	&game->bits_per_pixel, &game->size_line, &game->endian);
+	set_floor_color(game);
+	set_ceiling_color(game);
 	while (++x < WIDTH)
 	{
 		game->map->camera_x = 2 * x / (double)WIDTH - 1;
@@ -72,7 +74,7 @@ void	raycasting(t_game *game)
 		draw_lines_dda(game->map, game->cube);
 		get_dist_to_wall(game->map);
 		get_wall_height(game->map);
-		set_wall_color(game, game->map, x);
+		draw_vertical_lines(game, game->map, x);
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	mlx_destroy_image(game->mlx, game->img);

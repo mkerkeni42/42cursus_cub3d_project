@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:19:51 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/19 12:55:20 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:11:35 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@ void	my_pixel_put(t_game *game, int x, int y, int color)
 	*(int *)pixel = color;
 }
 
-void	draw_vertical_lines(t_game *game, t_map *map, int x, int color)
+void	draw_vertical_lines(t_game *game, t_map *map, int x)
 {
 	int	y;
+	int	color;
 
 	y = map->draw_start;
 	while (y <= map->draw_end)
 	{
+		color = draw_textures(game->no);
 		my_pixel_put(game, x, y, color);
 		y++;
 	}
@@ -45,12 +47,11 @@ int	get_color(int red, int green, int blue)
 	return (color);
 }
 
-void	set_wall_color(t_game *game, t_map *map, int x)
+/*void	set_wall_color(t_game *game, t_map *map, int x)
 {
 	int	color;
 
 	color = get_color(255, 0, 0);
 	if (map->side == 1)
 		color = color / 1.5;
-	draw_vertical_lines(game, map, x, color);
-}
+}*/
