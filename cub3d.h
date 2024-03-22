@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:00:05 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/21 15:23:14 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:40:42 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,17 @@
 # define BACK 115
 # define LEFT 97
 # define RIGHT 100
+
+typedef struct s_texture
+{
+	void	*img;
+	char	*addr;
+	int		bit_per_pixel;
+	int		line_len;
+	int		endian;
+	int		x;
+	int		y;
+}				t_texture;
 
 typedef struct s_color
 {
@@ -65,7 +76,12 @@ typedef struct s_map
 	int			draw_start;
 	int			draw_end;
 	char		card_point;
-//	unsigned int	buffer[HEIGHT][WIDTH];
+	double		wall_x;
+	int			tex_num;
+	int			tex_x;
+	double		step;
+	double		tex_pos;
+	int			tex_y;
 }				t_map;
 
 typedef struct s_cube
@@ -98,10 +114,10 @@ typedef struct 	s_game
 	int				size_line;
 	int				endian;
 	char			*textures[5];
-	char			*no;
-	char			*so;
-	char			*ea;
-	char			*we;
+	t_texture		no;
+	t_texture		so;
+	t_texture		ea;
+	t_texture		we;
 	int				tex_width;
 	int				tex_height;
 	t_map			*map;
@@ -141,15 +157,15 @@ void	draw_lines_dda(t_map *map, t_cube *cube);
 void	get_dist_to_wall(t_map *map);
 void	get_wall_height(t_map *map);
 
-void	set_wall_color(t_game *game, t_map *map, int x);
 void	set_floor_color(t_game *game);
 void	set_ceiling_color(t_game *game);
 void	my_pixel_put(t_game *game, int x, int y, int color);
 int		get_color(int red, int green, int blue);
 void	draw_vertical_lines(t_game *game, t_map *map, int x);
 
-void	get_textures(t_game *game);
-void	get_texture_file(t_game *game);
-int		draw_textures(char *texture);
+void		get_textures(t_game *game);
+void		get_texture_file(t_game *game);
+void		get_texture_coordinates(t_game *game, t_map *map);
+t_texture	find_texture(t_game *game);
 
 #endif

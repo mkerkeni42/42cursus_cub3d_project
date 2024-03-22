@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:19:51 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/21 15:11:35 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:20:04 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,16 @@ void	my_pixel_put(t_game *game, int x, int y, int color)
 	char	*pixel;
 
 	pixel = game->img_data + (y * game->size_line + x \
-	* (game->bits_per_pixel / 8));
+		* (game->bits_per_pixel / 8));
 	*(int *)pixel = color;
+}
+
+static int	get_pixel_color(t_texture text, int x, int y)
+{
+	char	*color;
+
+	color = text.addr + (y * text.line_len + x * (text.bit_per_pixel / 8));
+	return (*(unsigned int *)color);
 }
 
 void	draw_vertical_lines(t_game *game, t_map *map, int x)
@@ -27,9 +35,11 @@ void	draw_vertical_lines(t_game *game, t_map *map, int x)
 	int	color;
 
 	y = map->draw_start;
-	while (y <= map->draw_end)
+	while (y < map->draw_end)
 	{
-		color = draw_textures(game->no);
+		map->tex_y = (int)map->tex_pos & (game->tex_height - 1);
+		map->tex_pos += map->step;
+		color = get_pixel_color(find_texture(game), map->tex_x, map->tex_y);
 		my_pixel_put(game, x, y, color);
 		y++;
 	}
@@ -46,12 +56,3 @@ int	get_color(int red, int green, int blue)
 	color = (rgb_color.red << 16) | (rgb_color.green << 8) | rgb_color.blue;
 	return (color);
 }
-
-/*void	set_wall_color(t_game *game, t_map *map, int x)
-{
-	int	color;
-
-	color = get_color(255, 0, 0);
-	if (map->side == 1)
-		color = color / 1.5;
-}*/

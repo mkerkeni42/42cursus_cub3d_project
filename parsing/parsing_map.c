@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:47:30 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/03/18 10:59:33 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:57:14 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	check_map(t_cube *cube)
 	int	j;
 
 	i = -1;
+	cube->bool = 0;
 	while (cube->map[++i])
 	{
 		j = -1;

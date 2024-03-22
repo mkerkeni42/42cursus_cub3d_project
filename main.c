@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:59:27 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/21 15:26:59 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:11:32 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ static void	init_vars(t_game *game)
 {
 	game->tex_height = 64;
 	game->tex_width = 64;
-	get_textures(game);
 	game->map->pos.x = (double)get_pos(game->cube, 0) + 0.5;
 	game->map->pos.y = (double)get_pos(game->cube, 1) + 0.5;
 	init_dir(game->map);
@@ -101,6 +100,7 @@ int	main(int ac, char **av)
 	init_vars(&game);
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, WIDTH, HEIGHT, "Cub3D");
+	get_textures(&game);
 	raycasting(&game);
 	mlx_hook(game.win, 2, 1L << 0, &deal_key, &game);
 	mlx_hook(game.win, 17, 0, ft_exit_game, &game);

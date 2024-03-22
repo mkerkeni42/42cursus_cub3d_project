@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:30:15 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/21 15:30:50 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:33:05 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,20 @@ void	get_texture_file(t_game *game)
 		if (game->cube->elem[i][0] != 'F' && game->cube->elem[i][0] != 'C')
 			game->textures[i] = ft_strdup(game->cube->elem[i]); 
 	}
+	game->textures[i] = '\0';
+}
+
+static t_texture	get_texture_infos(t_game *game, char *path)
+{
+	t_texture	text;
+	char	*path2;
+	
+	path2 = ft_strchr(path, '.');
+	text.img = mlx_xpm_file_to_image(game->mlx, \
+		path2, &text.x, &text.y);
+	text.addr = mlx_get_data_addr(text.img, &(text.bit_per_pixel), \
+		&(text.line_len), &(text.endian));
+	return (text);
 }
 
 void	get_textures(t_game *game)
@@ -31,53 +45,42 @@ void	get_textures(t_game *game)
 	i = -1;
 	while (game->textures[++i])
 	{
-		if (game->textures[i][0] == 'N')
-		{
-			game->no = mlx_xpm_file_to_image(game->img_data, \
-			ft_strchr(game->textures[i], '.'), &game->tex_width, \
-			&game->tex_height);
-		}
-		else if ((game->textures[i][0] == 'S'))
-		{
-			game->so = mlx_xpm_file_to_image(game->img_data, \
-				ft_strchr(game->textures[i], '.'), &game->tex_width, \
-				&game->tex_height);
-		}
+		if ((game->textures[i][0] == 'S'))
+			game->so = get_texture_infos(game, game->textures[i]);
+		else if (game->textures[i][0] == 'N')
+			game->no = get_texture_infos(game, game->textures[i]);
 		else if ((game->textures[i][0] == 'E'))
-		{
-			game->ea = mlx_xpm_file_to_image(game->img_data, \
-				ft_strchr(game->textures[i], '.'), &game->tex_width, \
-				&game->tex_height);
-		}
+			game->ea = get_texture_infos(game, game->textures[i]);
 		else if ((game->textures[i][0] == 'W'))
-		{
-			game->we = mlx_xpm_file_to_image(game->img_data, \
-				ft_strchr(game->textures[i], '.'), &game->tex_width, \
-				&game->tex_height);
-		}
+			game->we = get_texture_infos(game, game->textures[i]);
 	}
 }
 
-int	draw_textures(char *texture)
+void	get_texture_coordinates(t_game *game, t_map *map)
 {
-	int	x;
-	int	y;
-	int	color;
-	t_color	rgb;
-	int	pixel_index;
-	
-	x = -1;
-	while(++x < 64)
-	{
-		y = -1;
-		while(++y < 64)
-		{
-			pixel_index = (y * 64 + x) * 4;
-			rgb.red = texture[pixel_index + 2];
-			rgb.green = texture[pixel_index + 1];
-			rgb.blue = texture[pixel_index];
-			color = get_color(rgb.red, rgb.green, rgb.blue);
-		}
-	}
-	return (color);
+	if (map->side == 0)
+		map->wall_x = map->pos.y + map->wall_dist * map->ray_dir.y;
+	else
+		map->wall_x = map->pos.x + map->wall_dist * map->ray_dir.x;
+	map->wall_x -= floor(map->wall_x);
+	map->tex_x = (int)(map->wall_x *(double)game->tex_width);
+	if (map->side == 0 && map->ray_dir.x > 0)
+		map->tex_x = game->tex_width - map->tex_num - 1;
+	if (map->side == 1 && map->ray_dir.y < 0)
+		map->tex_x = game->tex_width - map->tex_num - 1;
+	map->step = 1.0 * game->tex_height / map->wall_height;
+	map->tex_pos =  (map->draw_start - HEIGHT / 2 + map->wall_height / 2) * map->step;
+}
+
+t_texture	find_texture(t_game *game)
+{
+	if (game->map->side == 0 && game->map->pos.x < game->map->map_x)
+		return (game->ea);
+	else if (game->map->side == 0 && game->map->pos.x > game->map->map_x)
+		return (game->we);
+	else if (game->map->side == 1 && game->map->pos.y > game->map->map_y)
+		return (game->no);
+	else if (game->map->side == 1 && game->map->pos.y < game->map->map_y)
+		return (game->so);
+	return (game->no);
 }
