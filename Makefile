@@ -25,7 +25,9 @@ SRCS	=	main.c \
 			execution/raycasting.c \
 			execution/init_vectors.c \
 			execution/dda_algorithm.c \
-			execution/colors.c
+			execution/colors.c \
+			execution/floor_and_ceiling.c \
+			execution/textures.c
 
 OBJS = $(SRCS:.c=.o)
 

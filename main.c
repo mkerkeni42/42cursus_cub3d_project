@@ -6,7 +6,7 @@
 /*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:59:27 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/21 15:36:51 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/22 09:02:01 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,20 @@ int	check_file_name(char *file_name)
 	return (0);
 }
 
-static void	remove_nl_map(t_cube *cube)
+static void	remove_nl(char **array)
 {
 	int	i;
 	int	j;
 
 	i = -1;
 	j = 0;
-	while (cube->map[++i])
+	while (array[++i])
 	{
 		j = 0;
-		while (cube->map[i][j] && cube->map[i][j] != '\n')
+		while (array[i][j] && array[i][j] != '\n')
 			j++;
-		if (cube->map[i][j] == '\n')
-			cube->map[i][j] = '\0';
+		if (array[i][j] == '\n')
+			array[i][j] = '\0';
 	}
 }
 
@@ -72,6 +72,9 @@ static int	get_pos(t_cube *cube, int x)
 
 static void	init_vars(t_game *game)
 {
+	game->tex_height = 64;
+	game->tex_width = 64;
+	get_textures(game);
 	game->map->pos.x = (double)get_pos(game->cube, 0) + 0.5;
 	game->map->pos.y = (double)get_pos(game->cube, 1) + 0.5;
 	init_dir(game->map);
@@ -89,10 +92,13 @@ int	main(int ac, char **av)
 	if (check_file_name(av[1]))
 		ft_handlerror(9);
 	cpy_cub(&cube, av[1]);
-	remove_nl_map(&cube);
-	map.card_point = cube.pos;
+	remove_nl(cube.map);
+	remove_nl(cube.elem);
 	game.map = &map;
 	game.cube = &cube;
+	game.no = NULL;
+	get_texture_file(&game);
+	map.card_point = cube.pos;
 	init_vars(&game);
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, WIDTH, HEIGHT, "Cub3D");

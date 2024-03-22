@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:00:05 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/19 13:05:57 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/21 15:23:14 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_map
 	int			draw_start;
 	int			draw_end;
 	char		card_point;
+//	unsigned int	buffer[HEIGHT][WIDTH];
 }				t_map;
 
 typedef struct s_cube
@@ -86,18 +87,26 @@ typedef struct s_cube
 	char	pos;
 }			t_cube;
 
-typedef struct s_game
+typedef struct 	s_game
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*img_data;
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-	t_map	*map;
-	t_cube	*cube;
-}				t_game;
+	void			*mlx;
+	void			*win;
+	void			*img;
+	char			*img_data;
+	unsigned int	*text_ptr;
+	int				bits_per_pixel;
+	int				size_line;
+	int				endian;
+	char			*textures[5];
+	char			*no;
+	char			*so;
+	char			*ea;
+	char			*we;
+	int				tex_width;
+	int				tex_height;
+	t_map			*map;
+	t_cube			*cube;
+}					t_game;
 
 /*=========================PARSING=========================*/
 
@@ -123,14 +132,24 @@ void	go_front(t_game *game);
 void	go_back(t_game *game);
 void	go_right(t_game *game);
 void	go_left(t_game *game);
+
 void	raycasting(t_game *game);
 void	init_dir(t_map *map);
 void	init_plane(t_map *map);
+
 void	draw_lines_dda(t_map *map, t_cube *cube);
 void	get_dist_to_wall(t_map *map);
 void	get_wall_height(t_map *map);
+
 void	set_wall_color(t_game *game, t_map *map, int x);
+void	set_floor_color(t_game *game);
+void	set_ceiling_color(t_game *game);
+void	my_pixel_put(t_game *game, int x, int y, int color);
 int		get_color(int red, int green, int blue);
-void	draw_vertical_lines(t_game *game, t_map *map, int x, int color);
+void	draw_vertical_lines(t_game *game, t_map *map, int x);
+
+void	get_textures(t_game *game);
+void	get_texture_file(t_game *game);
+int		draw_textures(char *texture);
 
 #endif
