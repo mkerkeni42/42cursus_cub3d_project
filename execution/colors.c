@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:19:51 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/22 14:20:04 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:04:47 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	draw_vertical_lines(t_game *game, t_map *map, int x)
 	int	color;
 
 	y = map->draw_start;
-	while (y < map->draw_end)
+	while (y <= map->draw_end)
 	{
 		map->tex_y = (int)map->tex_pos & (game->tex_height - 1);
 		map->tex_pos += map->step;

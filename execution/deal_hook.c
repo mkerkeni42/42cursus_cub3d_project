@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:32:32 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/19 12:57:40 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:17:25 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static void	rot_left(t_game *game)
 	double	old_plane_x;
 
 	old_dir_x = game->map->dir.x;
-	game->map->dir.x = game->map->dir.x * cos(0.1) - game->map->dir.y * \
-	sin(0.1);
-	game->map->dir.y = old_dir_x * sin(0.1) + game->map->dir.y * cos(0.1);
+	game->map->dir.x = game->map->dir.x * cos(0.2) - game->map->dir.y * \
+	sin(0.2);
+	game->map->dir.y = old_dir_x * sin(0.2) + game->map->dir.y * cos(0.2);
 	old_plane_x = game->map->plane.x;
-	game->map->plane.x = game->map->plane.x * cos(0.1) - game->map->plane.y * \
-	sin(0.1);
-	game->map->plane.y = old_plane_x * sin(0.1) + game->map->plane.y * cos(0.1);
+	game->map->plane.x = game->map->plane.x * cos(0.2) - game->map->plane.y * \
+	sin(0.2);
+	game->map->plane.y = old_plane_x * sin(0.2) + game->map->plane.y * cos(0.2);
 }
 
 static void	rot_right(t_game *game)
@@ -34,13 +34,13 @@ static void	rot_right(t_game *game)
 
 	old_dir_x = game->map->dir.x;
 	old_plane_x = game->map->plane.x;
-	game->map->dir.x = game->map->dir.x * cos(-0.1) - game->map->dir.y * \
-	sin(-0.1);
-	game->map->dir.y = old_dir_x * sin(-0.1) + game->map->dir.y * cos(-0.1);
-	game->map->plane.x = game->map->plane.x * cos(-0.1) - game->map->plane.y * \
-	sin(-0.1);
-	game->map->plane.y = old_plane_x * sin(-0.1) + game->map->plane.y * \
-	cos(-0.1);
+	game->map->dir.x = game->map->dir.x * cos(-0.2) - game->map->dir.y * \
+	sin(-0.2);
+	game->map->dir.y = old_dir_x * sin(-0.2) + game->map->dir.y * cos(-0.2);
+	game->map->plane.x = game->map->plane.x * cos(-0.2) - game->map->plane.y * \
+	sin(-0.2);
+	game->map->plane.y = old_plane_x * sin(-0.2) + game->map->plane.y * \
+	cos(-0.2);
 }
 
 int	deal_key(int key, t_game *game)
