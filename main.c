@@ -6,7 +6,7 @@
 /*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:59:27 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/22 09:02:01 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:12:50 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@ int	check_file_name(char *file_name)
 	if (ft_strlen(dot) != 4)
 		return (1);
 	else
-	{
 		if (dot[1] != 'c' || dot[2] != 'u' || dot[3] != 'b')
 			return (1);
-	}
 	return (0);
 }
 
@@ -74,7 +72,6 @@ static void	init_vars(t_game *game)
 {
 	game->tex_height = 64;
 	game->tex_width = 64;
-	get_textures(game);
 	game->map->pos.x = (double)get_pos(game->cube, 0) + 0.5;
 	game->map->pos.y = (double)get_pos(game->cube, 1) + 0.5;
 	init_dir(game->map);
@@ -96,12 +93,12 @@ int	main(int ac, char **av)
 	remove_nl(cube.elem);
 	game.map = &map;
 	game.cube = &cube;
-	game.no = NULL;
 	get_texture_file(&game);
 	map.card_point = cube.pos;
 	init_vars(&game);
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, WIDTH, HEIGHT, "Cub3D");
+	get_textures(&game);
 	raycasting(&game);
 	mlx_hook(game.win, 2, 1L << 0, &deal_key, &game);
 	mlx_hook(game.win, 17, 0, ft_exit_game, &game);

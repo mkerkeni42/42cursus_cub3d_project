@@ -6,7 +6,7 @@
 /*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 11:59:33 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/21 15:42:09 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:47:13 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	raycasting(t_game *game)
 		draw_lines_dda(game->map, game->cube);
 		get_dist_to_wall(game->map);
 		get_wall_height(game->map);
+		get_texture_coordinates(game, game->map);
 		draw_vertical_lines(game, game->map, x);
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_param.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:19:56 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/03/15 12:38:26 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:02:06 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ void	check_path(char *path)
 	while (path[++fd] && path[fd] != '\n')
 		tmp[fd] = path[fd];
 	tmp[fd] = '\0';
+	if (file_name(tmp))
+		ft_handlerror(2);
 	fd = open(tmp, O_RDONLY);
 	if (fd == -1)
 		ft_handlerror(2);

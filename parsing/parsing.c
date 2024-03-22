@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:47:07 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/03/18 10:17:52 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:07:53 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+int	file_name(char *file_name)
+{
+	char	*dot;
+
+	dot = ft_strrchr(file_name, '.');
+	if (!dot)
+		return (1);
+	if (ft_strlen(dot) != 4)
+		return (1);
+	else
+		if (dot[1] != 'x' || dot[2] != 'p' || dot[3] != 'm')
+			return (1);
+	return (0);
+}
 
 void	free_tab_struct(t_cube *cube)
 {
