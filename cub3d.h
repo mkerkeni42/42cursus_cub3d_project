@@ -6,7 +6,7 @@
 /*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:00:05 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/22 15:00:45 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:45:56 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ typedef struct s_cube
 	char	pos;
 }			t_cube;
 
-typedef struct 	s_game
+typedef struct s_game
 {
 	void			*mlx;
 	void			*win;
@@ -126,43 +126,43 @@ typedef struct 	s_game
 
 /*=========================PARSING=========================*/
 
-void	cpy_cub(t_cube *cube, char *av);
-void	cpy_elem(t_cube *cube);
-void	check_param(t_cube *cube);
-void	cpy_map(t_cube *cube);
-void	check_file(t_cube *cube);
-void	check_pos(t_cube *cube, int c);
-void	free_tab_struct(t_cube *cube);
-int		file_name(char *file_name);
+void		cpy_cub(t_cube *cube, char *av);
+void		cpy_elem(t_cube *cube);
+void		check_param(t_cube *cube);
+void		cpy_map(t_cube *cube);
+void		check_file(t_cube *cube);
+void		check_pos(t_cube *cube, int c);
+void		free_tab_struct(t_cube *cube);
+int			file_name(char *file_name);
 
 /*==========================UTILS==========================*/
 
-int		ft_exit_game(t_game *game, int x);
-void	ft_handlerror(int x);
-void	free_array(char **array);
-void	print_array(char **array);
+int			ft_exit_game(t_game *game, int x);
+void		ft_handlerror(int x);
+void		free_array(char **array);
+void		print_array(char **array);
 
 /*========================EXECUTION========================*/
 
-int		deal_key(int key, t_game *game);
-void	go_front(t_game *game);
-void	go_back(t_game *game);
-void	go_right(t_game *game);
-void	go_left(t_game *game);
+int			deal_key(int key, t_game *game);
+void		go_front(t_game *game);
+void		go_back(t_game *game);
+void		go_right(t_game *game);
+void		go_left(t_game *game);
 
-void	raycasting(t_game *game);
-void	init_dir(t_map *map);
-void	init_plane(t_map *map);
+void		raycasting(t_game *game);
+void		init_dir(t_map *map);
+void		init_plane(t_map *map);
 
-void	draw_lines_dda(t_map *map, t_cube *cube);
-void	get_dist_to_wall(t_map *map);
-void	get_wall_height(t_map *map);
+void		draw_lines_dda(t_map *map, t_cube *cube);
+void		get_dist_to_wall(t_map *map);
+void		get_wall_height(t_map *map);
 
-void	set_floor_color(t_game *game);
-void	set_ceiling_color(t_game *game);
-void	my_pixel_put(t_game *game, int x, int y, int color);
-int		get_color(int red, int green, int blue);
-void	draw_vertical_lines(t_game *game, t_map *map, int x);
+void		set_floor_color(t_game *game);
+void		set_ceiling_color(t_game *game);
+void		my_pixel_put(t_game *game, int x, int y, int color);
+int			get_color(int red, int green, int blue);
+void		draw_vertical_lines(t_game *game, t_map *map, int x);
 
 void		get_textures(t_game *game);
 void		get_texture_file(t_game *game);

@@ -6,7 +6,7 @@
 /*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:30:15 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/22 14:47:00 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/22 16:42:59 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	get_texture_file(t_game *game)
 {
-	int	i;	
+	int	i;
 
 	i = -1;
 	while (game->cube->elem[++i])
 	{
 		if (game->cube->elem[i][0] != 'F' && game->cube->elem[i][0] != 'C')
-			game->textures[i] = ft_strdup(game->cube->elem[i]); 
+			game->textures[i] = ft_strdup(game->cube->elem[i]);
 	}
 	game->textures[i] = '\0';
 }
@@ -28,8 +28,8 @@ void	get_texture_file(t_game *game)
 static t_texture	get_texture_infos(t_game *game, char *path)
 {
 	t_texture	text;
-	char	*path2;
-	
+	char		*path2;
+
 	path2 = ft_strchr(path, '.');
 	text.img = mlx_xpm_file_to_image(game->mlx, \
 		path2, &text.x, &text.y);
@@ -65,11 +65,12 @@ void	get_texture_coordinates(t_game *game, t_map *map)
 	map->wall_x -= floor(map->wall_x);
 	map->tex_x = (int)(map->wall_x *(double)game->tex_width);
 	if (map->side == 0 && map->ray_dir.x > 0)
-		map->tex_x = game->tex_width - map->tex_num - 1;
+		map->tex_x = game->tex_width - map->tex_x - 1;
 	if (map->side == 1 && map->ray_dir.y < 0)
-		map->tex_x = game->tex_width - map->tex_num - 1;
+		map->tex_x = game->tex_width - map->tex_x - 1;
 	map->step = 1.0 * game->tex_height / map->wall_height;
-	map->tex_pos =  (map->draw_start - HEIGHT / 2 + map->wall_height / 2) * map->step;
+	map->tex_pos = (map->draw_start - HEIGHT / 2 + map->wall_height / 2) \
+		* map->step;
 }
 
 t_texture	find_texture(t_game *game)
