@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:39:24 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/19 11:13:04 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:41:51 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,7 @@ void	ft_handlerror(int x)
 		write(2, "Error\nWrong file name extension !\n", 35);
 	if (x == 10)
 		write(2, "Error\nThere is no start position !\n", 36);
+	if (x == 11)
+		write(2, "Error\nThere is no map !\n", 25);
 	exit(EXIT_FAILURE);
 }

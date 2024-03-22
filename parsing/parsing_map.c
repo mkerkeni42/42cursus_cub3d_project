@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:47:30 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/03/22 13:57:14 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/22 15:43:17 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	check_file(t_cube *cube)
 {
 	int	j;
 
+	cube->map = NULL;
 	while (cube->file[++cube->i])
 	{
 		j = -1;
@@ -96,4 +97,6 @@ void	check_file(t_cube *cube)
 			}
 		}
 	}
+	if (!cube->map)
+		ft_handlerror(11);
 }
