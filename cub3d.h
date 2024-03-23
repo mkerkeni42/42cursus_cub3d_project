@@ -6,7 +6,7 @@
 /*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:00:05 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/22 16:45:56 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:10:53 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,21 +126,24 @@ typedef struct s_game
 
 /*=========================PARSING=========================*/
 
-void		cpy_cub(t_cube *cube, char *av);
+void		parsing(t_cube *cube, char *av);
 void		cpy_elem(t_cube *cube);
 void		check_param(t_cube *cube);
 void		cpy_map(t_cube *cube);
 void		check_file(t_cube *cube);
 void		check_pos(t_cube *cube, int c);
-void		free_tab_struct(t_cube *cube);
 int			file_name(char *file_name);
 
 /*==========================UTILS==========================*/
 
+void		init_game(t_game *game);
+void		init_vars(t_game *game);
+void		free_tab_struct(t_cube *cube);
 int			ft_exit_game(t_game *game, int x);
 void		ft_handlerror(int x);
 void		free_array(char **array);
 void		print_array(char **array);
+void		remove_nl(char **array);
 
 /*========================EXECUTION========================*/
 

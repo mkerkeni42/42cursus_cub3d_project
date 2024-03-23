@@ -6,7 +6,7 @@
 /*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:59:27 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/22 16:38:55 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:12:53 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,12 @@ int	check_file_name(char *file_name)
 	return (0);
 }
 
-static void	remove_nl(char **array)
+void	remove_nl(char **array)
 {
 	int	i;
 	int	j;
 
 	i = -1;
-	j = 0;
 	while (array[++i])
 	{
 		j = 0;
@@ -50,7 +49,6 @@ static int	get_pos(t_cube *cube, int x)
 	int	j;
 
 	i = -1;
-	j = -1;
 	while (cube->map[++i])
 	{
 		j = -1;
@@ -68,7 +66,7 @@ static int	get_pos(t_cube *cube, int x)
 	return (EXIT_FAILURE);
 }
 
-static void	init_vars(t_game *game)
+void	init_vars(t_game *game)
 {
 	game->tex_height = 64;
 	game->tex_width = 64;
@@ -88,21 +86,10 @@ int	main(int ac, char **av)
 		ft_handlerror(0);
 	if (check_file_name(av[1]))
 		ft_handlerror(9);
-	cpy_cub(&cube, av[1]);
-	remove_nl(cube.map);
-	remove_nl(cube.elem);
+	parsing(&cube, av[1]);
 	game.map = &map;
 	game.cube = &cube;
-	get_texture_file(&game);
-	map.card_point = cube.pos;
-	init_vars(&game);
-	game.mlx = mlx_init();
-	game.win = mlx_new_window(game.mlx, WIDTH, HEIGHT, "Cub3D");
-	get_textures(&game);
-	raycasting(&game);
-	mlx_hook(game.win, 2, 1L << 0, &deal_key, &game);
-	mlx_hook(game.win, 17, 0, ft_exit_game, &game);
-	mlx_loop(game.mlx);
+	init_game(&game);
 	free_tab_struct(&cube);
 	return (0);
 }

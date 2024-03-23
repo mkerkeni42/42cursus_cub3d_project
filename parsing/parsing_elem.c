@@ -6,7 +6,7 @@
 /*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 09:22:39 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/03/18 09:27:57 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:03:48 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,6 @@ void	cpy_elem(t_cube *cube)
 		ft_handlerror(1);
 	check_param(cube);
 	check_file(cube);
+	remove_nl(cube->map);
+	remove_nl(cube->elem);
 }

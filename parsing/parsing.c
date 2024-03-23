@@ -6,7 +6,7 @@
 /*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:47:07 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/03/22 15:46:31 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/23 13:31:41 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	size_of_file(t_cube *cube, char *av)
 	return (cube->nb_line + 1);
 }
 
-void	cpy_cub(t_cube *cube, char *av)
+void	parsing(t_cube *cube, char *av)
 {
 	int	fd;
 	int	i;

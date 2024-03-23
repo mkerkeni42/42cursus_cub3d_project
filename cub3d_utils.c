@@ -6,7 +6,7 @@
 /*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:39:24 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/22 15:41:51 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/23 14:11:12 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,18 @@ void	ft_handlerror(int x)
 	if (x == 11)
 		write(2, "Error\nThere is no map !\n", 25);
 	exit(EXIT_FAILURE);
+}
+
+void	init_game(t_game *game)
+{
+	get_texture_file(game);
+	game->map->card_point = game->cube->pos;
+	init_vars(game);
+	game->mlx = mlx_init();
+	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "Cub3D");
+	get_textures(game);
+	raycasting(game);
+	mlx_hook(game->win, 2, 1L << 0, &deal_key, game);
+	mlx_hook(game->win, 17, 0, ft_exit_game, game);
+	mlx_loop(game->mlx);
 }
