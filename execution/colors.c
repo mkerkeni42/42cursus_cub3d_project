@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:19:51 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/22 15:04:47 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/25 11:26:00 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	draw_vertical_lines(t_game *game, t_map *map, int x)
 	{
 		map->tex_y = (int)map->tex_pos & (game->tex_height - 1);
 		map->tex_pos += map->step;
-		color = get_pixel_color(find_texture(game), map->tex_x, map->tex_y);
+		color = get_pixel_color(find_texture(game), map->tex_y, map->tex_x);
+		
 		my_pixel_put(game, x, y, color);
 		y++;
 	}
