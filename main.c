@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:59:27 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/23 14:12:53 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/25 14:49:32 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_file_name(char *file_name)
 {
 	char	*dot;
 
-	dot = ft_strchr(file_name, '.');
+	dot = ft_strrchr(file_name, '.');
 	if (!dot)
 		return (1);
 	if (ft_strlen(dot) != 4)
