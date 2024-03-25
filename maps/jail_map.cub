@@ -1,11 +1,14 @@
-EA ./sprites/jail_no.xpm
+EA ./sprites/jail_ea.xpm
 WE ./sprites/jail_so.xpm
-NO ./sprites/jail_ea.xpm
+NO ./sprites/jail_no.xpm
 SO ./sprites/jail_we.xpm
 
 F 20,20,22
 C 28,28,32
 
+
 1111
-10W1
+1101
+1W11
 1111
+

@@ -1,4 +1,4 @@
-SO ./file.txt
+SO ./sprites/north.xpm
 NO ./sprites/south.xpm
 WE ./sprites/west.xpm
 EA ./sprites/east.xpm
