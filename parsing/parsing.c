@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:47:07 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/03/23 13:31:41 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:02:39 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,19 @@ int	file_name(char *file_name)
 	return (0);
 }
 
-void	free_tab_struct(t_cube *cube)
+int	check_file_name(char *file_name)
 {
-	free_array(cube->elem);
-	free_array(cube->file);
-	free_array(cube->map);
+	char	*dot;
+
+	dot = ft_strrchr(file_name, '.');
+	if (!dot)
+		return (1);
+	if (ft_strlen(dot) != 4)
+		return (1);
+	else
+		if (dot[1] != 'c' || dot[2] != 'u' || dot[3] != 'b')
+			return (1);
+	return (0);
 }
 
 void	check_pos(t_cube *cube, int c)

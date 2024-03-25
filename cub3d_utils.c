@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:39:24 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/24 15:03:55 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:08:39 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,24 @@ void	free_array(char **array)
 	free(array);
 }
 
-void	print_array(char **array)
+void	*ft_malloc(size_t size)
 {
-	int	x;
-	int	y;
+	void	*ptr;
 
-	x = 0;
-	y = 0;
-	while (array[y])
+	ptr = malloc(size);
+	if (!ptr)
 	{
-		x = 0;
-		while (array[y][x])
-		{
-			write(1, &array[y][x], 1);
-			x++;
-		}
-		write(1, "\n", 1);
-		y++;
+		write(2, "Error\nMalloc failure\n", 22);
+		exit(EXIT_FAILURE);
 	}
+	return (ptr);
+}
+
+void	free_tab_struct(t_cube *cube)
+{
+	free_array(cube->elem);
+	free_array(cube->file);
+	free_array(cube->map);
 }
 
 void	ft_handlerror(int x)
@@ -77,18 +77,4 @@ void	ft_handlerror(int x)
 	if (x == 11)
 		write(2, "Error\nThere is no map !\n", 25);
 	exit(EXIT_FAILURE);
-}
-
-void	init_game(t_game *game)
-{
-	get_texture_file(game);
-	game->map->card_point = game->cube->pos;
-	init_vars(game);
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "Cub3D");
-	get_textures(game);
-	raycasting(game);
-	mlx_hook(game->win, 2, 1L << 0, &deal_key, game);
-	mlx_hook(game->win, 17, 0, ft_exit_game, game);
-	mlx_loop(game->mlx);
 }

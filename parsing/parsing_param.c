@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_param.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:19:56 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/03/22 15:02:06 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:10:28 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	check_path(char *path)
 	char	*tmp;
 
 	fd = -1;
-	tmp = malloc(sizeof(char) * ft_strlen(path));
+	tmp = ft_malloc(sizeof(char) * ft_strlen(path));
 	while (path[++fd] && path[fd] != '\n')
 		tmp[fd] = path[fd];
 	tmp[fd] = '\0';

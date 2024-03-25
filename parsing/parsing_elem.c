@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_elem.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 09:22:39 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/03/23 14:03:48 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:09:52 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	cpy_elem(t_cube *cube)
 {
 	int	j;
 
-	cube->elem = malloc(sizeof(char *) * 7);
+	cube->elem = ft_malloc(sizeof(char *) * 7);
 	j = -1;
 	cube->i = -1;
 	set_elem(cube);
@@ -76,7 +76,7 @@ void	cpy_elem(t_cube *cube)
 	{
 		if (!pars_elem(cube))
 		{
-			cube->elem[++j] = malloc(sizeof(char) \
+			cube->elem[++j] = ft_malloc(sizeof(char) \
 				* (ft_strlen(cube->file[cube->i]) + 1));
 			cube->elem[j] = ft_strcpy(cube->elem[j], cube->file[cube->i]);
 		}

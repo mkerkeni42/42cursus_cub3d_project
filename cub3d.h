@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:00:05 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/23 14:10:53 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:04:01 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ void		cpy_map(t_cube *cube);
 void		check_file(t_cube *cube);
 void		check_pos(t_cube *cube, int c);
 int			file_name(char *file_name);
+int			check_file_name(char *file_name);
 
 /*==========================UTILS==========================*/
 
@@ -142,8 +143,8 @@ void		free_tab_struct(t_cube *cube);
 int			ft_exit_game(t_game *game, int x);
 void		ft_handlerror(int x);
 void		free_array(char **array);
-void		print_array(char **array);
 void		remove_nl(char **array);
+void		*ft_malloc(size_t size);
 
 /*========================EXECUTION========================*/
 
