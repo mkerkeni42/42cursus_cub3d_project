@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:19:51 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/22 15:04:47 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/25 14:33:42 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	draw_vertical_lines(t_game *game, t_map *map, int x)
 		map->tex_y = (int)map->tex_pos & (game->tex_height - 1);
 		map->tex_pos += map->step;
 		color = get_pixel_color(find_texture(game), map->tex_x, map->tex_y);
+		
 		my_pixel_put(game, x, y, color);
 		y++;
 	}
@@ -48,7 +49,7 @@ void	draw_vertical_lines(t_game *game, t_map *map, int x)
 int	get_color(int red, int green, int blue)
 {
 	t_color	rgb_color;
-	int		color;	
+	int		color;
 
 	rgb_color.red = red;
 	rgb_color.green = green;

@@ -6,7 +6,7 @@
 /*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:30:15 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/22 16:42:59 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/25 14:02:22 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ void	get_texture_file(t_game *game)
 	int	i;
 
 	i = -1;
+	while (++i < 5)
+		game->textures[i] = NULL;
+	i = -1;
 	while (game->cube->elem[++i])
-	{
 		if (game->cube->elem[i][0] != 'F' && game->cube->elem[i][0] != 'C')
 			game->textures[i] = ft_strdup(game->cube->elem[i]);
-	}
 	game->textures[i] = '\0';
 }
 

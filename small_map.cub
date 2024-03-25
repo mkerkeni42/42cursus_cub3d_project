@@ -1,0 +1,11 @@
+SO ./sprites/nature_so.xpm
+NO ./sprites/tree_no.xpm
+WE ./sprites/tree_we.xpm
+EA ./sprites/tree_ea.xpm
+
+F 154,205,50
+C 10,214,255
+
+111
+1W1
+111
