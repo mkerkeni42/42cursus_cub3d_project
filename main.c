@@ -6,25 +6,24 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:59:27 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/25 14:49:32 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:02:17 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_file_name(char *file_name)
+void	init_game(t_game *game)
 {
-	char	*dot;
-
-	dot = ft_strrchr(file_name, '.');
-	if (!dot)
-		return (1);
-	if (ft_strlen(dot) != 4)
-		return (1);
-	else
-		if (dot[1] != 'c' || dot[2] != 'u' || dot[3] != 'b')
-			return (1);
-	return (0);
+	get_texture_file(game);
+	game->map->card_point = game->cube->pos;
+	init_vars(game);
+	game->mlx = mlx_init();
+	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "Cub3D");
+	get_textures(game);
+	raycasting(game);
+	mlx_hook(game->win, 2, 1L << 0, &deal_key, game);
+	mlx_hook(game->win, 17, 0, ft_exit_game, game);
+	mlx_loop(game->mlx);
 }
 
 void	remove_nl(char **array)

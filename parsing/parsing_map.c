@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:47:30 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/03/23 14:03:39 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/03/25 15:10:21 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ void	cpy_map(t_cube *cube)
 {
 	int	j;
 
-	cube->map = malloc(sizeof(char *) * (cube->nb_line - cube->i + 1));
+	cube->map = ft_malloc(sizeof(char *) * (cube->nb_line - cube->i + 1));
 	j = -1;
 	while (cube->file[cube->i])
 	{
-		cube->map[++j] = malloc(sizeof(char) \
+		cube->map[++j] = ft_malloc(sizeof(char) \
 			* (ft_strlen(cube->file[cube->i]) + 1));
 		cube->map[j] = ft_strcpy(cube->map[j], cube->file[cube->i]);
 		cube->i++;
