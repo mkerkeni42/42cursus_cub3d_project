@@ -42,7 +42,7 @@ endif
 	@$(CC) $(CFLAGS) -c -I ./inc/ $< -o $(<:.c=.o)
 
 #------------------RULES---------------------#
-NAME = cub3d
+NAME = cub3D
 
 all : $(NAME)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:47:30 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/03/25 15:10:21 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:49:16 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ void	check_map(t_cube *cube)
 		j = -1;
 		while (cube->map[i][++j])
 		{
+			if ((i == 0 || i == cube->l) && cube->map[i][j] != '1' \
+				&& cube->map[i][j] != ' ' && cube->map[i][j] != '\n')
+				ft_handlerror(7);
 			check_pos(cube, cube->map[i][j]);
 			if (check_value(cube->map[i][j], 0) && cube->map[i][j] != ' ' \
 				&& cube->map[i][j] != '\n')
@@ -63,6 +66,7 @@ void	cpy_map(t_cube *cube)
 {
 	int	j;
 
+	cube->l = cube->nb_line - cube->i - 1;
 	cube->map = ft_malloc(sizeof(char *) * (cube->nb_line - cube->i + 1));
 	j = -1;
 	while (cube->file[cube->i])

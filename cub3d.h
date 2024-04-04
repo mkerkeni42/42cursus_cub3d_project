@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:00:05 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/25 15:04:01 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/04/02 15:46:45 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_cube
 	int		nb_line;
 	int		bool;
 	int		i;
+	int		l;
 	int		no;
 	int		so;
 	int		we;

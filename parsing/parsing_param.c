@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_param.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:19:56 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/03/25 15:10:28 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/04/02 16:01:43 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ static int	check_value(char *rgb)
 	{
 		if (nb > 1 && rgb[i] == ' ')
 			ft_handlerror(4);
-		if (rgb[i] == ' ' || rgb[i] == '\n' || (rgb[i] == 'F' && i == 0) \
-			|| (rgb[i] == 'C' && i == 0))
+		if ((rgb[i] == ' ' && i == 1) || rgb[i] == '\n' \
+			|| (rgb[i] == 'F' && i == 0) || (rgb[i] == 'C' && i == 0))
 			continue ;
 		if (!ft_isdigit(rgb[i]))
 			ft_handlerror(4);
@@ -71,6 +71,8 @@ void	check_rgb(char **rgb)
 	i = -1;
 	while (rgb[++i])
 	{
+		if (i == 0 && ft_strlen(rgb[i]) < 3)
+			ft_handlerror(3);
 		nb = check_value(rgb[i]);
 		if (nb > 3 || ft_atoi(rgb[i]) > 255)
 			ft_handlerror(3);
