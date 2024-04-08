@@ -6,7 +6,7 @@
 /*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:19:56 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/04/02 16:01:43 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/04/08 14:46:54 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	check_rgb(char **rgb)
 	i = -1;
 	while (rgb[++i])
 	{
-		if (i == 0 && ft_strlen(rgb[i]) < 3)
+		if (i == 0 && (ft_strlen(rgb[i]) < 3 || ft_atoi(rgb[i] + 2) > 255))
 			ft_handlerror(3);
 		nb = check_value(rgb[i]);
 		if (nb > 3 || ft_atoi(rgb[i]) > 255)

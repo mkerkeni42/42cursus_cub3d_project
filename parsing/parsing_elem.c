@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_elem.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 09:22:39 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/03/25 15:09:52 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:50:02 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ static int	pars_elem(t_cube *cube)
 	char	**tmp;
 
 	tmp = ft_split(cube->file[cube->i], ' ');
+	if (!ft_strncmp(tmp[0], "\n", 1))
+	{
+		free_array(tmp);
+		return (-1);
+	}
 	if (!ft_strncmp(tmp[0], "NO", ft_strlen(tmp[0])))
 		return (check_double(cube, "NO", tmp));
 	else if (!ft_strncmp(tmp[0], "SO", ft_strlen(tmp[0])))
@@ -64,6 +69,20 @@ static int	pars_elem(t_cube *cube)
 	return (1);
 }
 
+static void	check_res(t_cube *cube, int *j, int res)
+{
+	if (res == -1)
+			return ;
+	else if (!res)
+	{
+		cube->elem[++*j] = ft_malloc(sizeof(char) \
+			* (ft_strlen(cube->file[cube->i]) + 1));
+		cube->elem[*j] = ft_strcpy(cube->elem[*j], cube->file[cube->i]);
+	}
+	else
+		ft_handlerror(1);
+}
+
 void	cpy_elem(t_cube *cube)
 {
 	int	j;
@@ -73,14 +92,7 @@ void	cpy_elem(t_cube *cube)
 	cube->i = -1;
 	set_elem(cube);
 	while (j != 5 && cube->file[++cube->i])
-	{
-		if (!pars_elem(cube))
-		{
-			cube->elem[++j] = ft_malloc(sizeof(char) \
-				* (ft_strlen(cube->file[cube->i]) + 1));
-			cube->elem[j] = ft_strcpy(cube->elem[j], cube->file[cube->i]);
-		}
-	}
+		check_res(cube, &j, pars_elem(cube));
 	cube->elem[cube->i] = '\0';
 	if (j != 5)
 		ft_handlerror(1);

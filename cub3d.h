@@ -6,7 +6,7 @@
 /*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:00:05 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/04/02 15:46:45 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/04/08 14:58:13 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ typedef struct s_cube
 	int		ea;
 	int		f;
 	int		c;
+	int		res;
 	char	pos;
 }			t_cube;
 
