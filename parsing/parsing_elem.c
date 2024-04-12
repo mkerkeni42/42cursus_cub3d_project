@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_elem.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 09:22:39 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/04/08 15:50:02 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:32:41 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int	pars_elem(t_cube *cube)
 static void	check_res(t_cube *cube, int *j, int res)
 {
 	if (res == -1)
-			return ;
+		return ;
 	else if (!res)
 	{
 		cube->elem[++*j] = ft_malloc(sizeof(char) \
@@ -87,13 +87,13 @@ void	cpy_elem(t_cube *cube)
 {
 	int	j;
 
-	cube->elem = ft_malloc(sizeof(char *) * 7);
+	cube->elem = ft_malloc(sizeof(char *) * 6 + 1);
 	j = -1;
 	cube->i = -1;
 	set_elem(cube);
-	while (j != 5 && cube->file[++cube->i])
+	while (j < 5 && cube->file[++cube->i])
 		check_res(cube, &j, pars_elem(cube));
-	cube->elem[cube->i] = '\0';
+	cube->elem[++j] = NULL; // ici j'ai mis j au lieu de cube->i
 	if (j != 5)
 		ft_handlerror(1);
 	check_param(cube);

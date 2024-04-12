@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_param.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:19:56 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/04/08 14:46:54 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:34:04 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,13 @@ void	check_rgb(char **rgb)
 		ft_handlerror(5);
 }
 
-void	check_path(char *path)
+void	check_path(char **elem, char *path)
 {
 	int		fd;
 	char	*tmp;
 
 	fd = -1;
-	tmp = ft_malloc(sizeof(char) * ft_strlen(path));
+	tmp = ft_malloc(sizeof(char) * ft_strlen(path) + 1); // ici j'ai rajoute le + 1 pour le \0
 	while (path[++fd] && path[fd] != '\n')
 		tmp[fd] = path[fd];
 	tmp[fd] = '\0';
@@ -95,7 +95,10 @@ void	check_path(char *path)
 		ft_handlerror(2);
 	fd = open(tmp, O_RDONLY);
 	if (fd == -1)
+	{
+		free_array(elem);
 		ft_handlerror(2);
+	}
 	close(fd);
 	free(tmp);
 }
@@ -111,7 +114,7 @@ void	check_param(t_cube *cube)
 		tmp = ft_split(cube->elem[i], ' ');
 		if (ft_strlen(tmp[0]) == 2)
 		{
-			check_path(tmp[1]);
+			check_path(tmp, tmp[1]);
 			free_array(tmp);
 		}
 		else

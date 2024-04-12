@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 13:30:15 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/03/25 14:02:22 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/04/12 11:04:29 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 void	get_texture_file(t_game *game)
 {
 	int	i;
+	int	j;
 
 	i = -1;
-	while (++i < 5)
-		game->textures[i] = NULL;
-	i = -1;
+	j = -1;
 	while (game->cube->elem[++i])
+	{
 		if (game->cube->elem[i][0] != 'F' && game->cube->elem[i][0] != 'C')
-			game->textures[i] = ft_strdup(game->cube->elem[i]);
-	game->textures[i] = '\0';
+			game->textures[++j] = ft_strdup(game->cube->elem[i]);
+	}
+	game->textures[j + 1] = '\0';
 }
 
 static t_texture	get_texture_infos(t_game *game, char *path)
