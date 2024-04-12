@@ -1,6 +1,6 @@
-NO ./textures/blackhole/blackhole_north.xpm
-SO ./textures/blackhole/blackhole_south.xpm
-EA ./textures/blackhole/blackhole_east.xpm
+NO ./sprites/north.xpm
+SO ./sprites/south.xpm
+EA ./sprites/east.xpm
 C 225,30,0
 F 10,30,0
 
@@ -13,4 +13,4 @@ F 10,30,0
 100111111111111
 100000000000001
 111111111111111
-WE ./textures/blackhole/blackhole_west.xpm
+WE ./sprites/west.xpm

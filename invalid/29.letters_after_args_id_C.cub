@@ -1,7 +1,7 @@
-NO ./textures/blackhole/blackhole_north.xpm
-SO ./textures/blackhole/blackhole_south.xpm
-WE ./textures/blackhole/blackhole_west.xpm
-EA ./textures/blackhole/blackhole_east.xpm
+NO ./sprites/north.xpm
+SO ./sprites/south.xpm
+WE ./sprites/west.xpm
+EA ./sprites/east.xpm
 C 25, 10, 10 caca
 F 10, 10, 10
 

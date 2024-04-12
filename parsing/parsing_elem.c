@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 09:22:39 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/04/12 16:32:41 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/04/13 00:04:32 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,10 @@ static void	check_res(t_cube *cube, int *j, int res)
 		return ;
 	else if (!res)
 	{
-		cube->elem[++*j] = ft_malloc(sizeof(char) \
+		cube->elem[*j] = ft_malloc(sizeof(char) \
 			* (ft_strlen(cube->file[cube->i]) + 1));
 		cube->elem[*j] = ft_strcpy(cube->elem[*j], cube->file[cube->i]);
+		(*j)++;
 	}
 	else
 		ft_handlerror(1);
@@ -87,14 +88,14 @@ void	cpy_elem(t_cube *cube)
 {
 	int	j;
 
-	cube->elem = ft_malloc(sizeof(char *) * 6 + 1);
-	j = -1;
+	cube->elem = ft_malloc(sizeof(char *) * (6 + 1));
+	j = 0;
 	cube->i = -1;
 	set_elem(cube);
-	while (j < 5 && cube->file[++cube->i])
+	while (j < 6 && cube->file[++cube->i])
 		check_res(cube, &j, pars_elem(cube));
-	cube->elem[++j] = NULL; // ici j'ai mis j au lieu de cube->i
-	if (j != 5)
+	cube->elem[j] = NULL; // ici j'ai mis j au lieu de cube->i
+	if (j != 6)
 		ft_handlerror(1);
 	check_param(cube);
 	check_file(cube);

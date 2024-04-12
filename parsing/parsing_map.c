@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:47:30 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/04/02 15:49:16 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/04/13 00:06:20 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,9 @@ void	check_map(t_cube *cube)
 		j = -1;
 		while (cube->map[i][++j])
 		{
-			if ((i == 0 || i == cube->l) && cube->map[i][j] != '1' \
-				&& cube->map[i][j] != ' ' && cube->map[i][j] != '\n')
+			if ((i == 0 || i == cube->l || j == 0 \
+				|| j == ft_strlen(cube->map[i])) && cube->map[i][j] != '1' \
+				&& cube->map[i][j] != ' ' && cube->map[i][j] != '\n') //ajout de la verification sur le cote
 				ft_handlerror(7);
 			check_pos(cube, cube->map[i][j]);
 			if (check_value(cube->map[i][j], 0) && cube->map[i][j] != ' ' \

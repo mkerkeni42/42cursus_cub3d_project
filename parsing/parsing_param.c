@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:19:56 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/04/12 16:34:04 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/04/13 00:01:46 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	check_path(char **elem, char *path)
 		ft_handlerror(2);
 	fd = open(tmp, O_RDONLY);
 	if (fd == -1)
-	{
+	{	
 		free_array(elem);
 		ft_handlerror(2);
 	}
@@ -107,13 +107,19 @@ void	check_param(t_cube *cube)
 {
 	char	**tmp;
 	int		i;
+	int		j;
 
 	i = -1;
+	j = 0;
 	while (cube->elem[++i])
 	{
 		tmp = ft_split(cube->elem[i], ' ');
 		if (ft_strlen(tmp[0]) == 2)
 		{
+			while (tmp[j])
+				j++;
+			if (j != 2) // check si plus de 2 arguments pour la texture
+				ft_handlerror(0);
 			check_path(tmp, tmp[1]);
 			free_array(tmp);
 		}

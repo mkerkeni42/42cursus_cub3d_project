@@ -1,10 +1,10 @@
-NO ./textures/blackhole/blackhole_north.xpm
+NO ./sprites/north.xpm
 		   		   caca    
-SO ./textures/blackhole/blackhole_south.xpm
-WE ./textures/blackhole/blackhole_west.xpm
-EA ./textures/blackhole/blackhole_east.xpm
-C 67, 10, 10
-F 10, 10, 10
+SO ./sprites/south.xpm
+WE ./sprites/west.xpm
+EA ./sprites/east.xpm
+C 67,10,10
+F 10,10,10
 
 111111111111111
 100000000000001
