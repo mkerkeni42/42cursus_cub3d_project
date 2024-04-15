@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:19:56 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/04/13 00:01:46 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/04/15 15:36:57 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 void	get_color_arr(t_cube *cube, char **line, int x)
 {
 	int		i;
-	int		j;
-	int		k;
-	char	tmp[4];
 
 	if (line[0][0] == 'F')
 		x = 0;
@@ -26,40 +23,42 @@ void	get_color_arr(t_cube *cube, char **line, int x)
 	i = -1;
 	while (line[++i])
 	{
-		j = -1;
-		k = -1;
-		while (line[i][++j])
+		if (i == 0)
 		{
-			if (ft_isdigit(line[i][j]))
-				tmp[++k] = line[i][j];
+			if (x == 0)
+				cube->floor[i] = ft_atoi(line[i] + 1);
+			else if (x == 1)
+				cube->ceiling[i] = ft_atoi(line[i] + 1);
 		}
-		tmp[k + 1] = '\0';
-		if (x == 0)
-			cube->floor[i] = ft_atoi(tmp);
-		else if (x == 1)
-			cube->ceiling[i] = ft_atoi(tmp);
+		else
+		{
+			if (x == 0)
+				cube->floor[i] = ft_atoi(line[i]);
+			else if (x == 1)
+				cube->ceiling[i] = ft_atoi(line[i]);
+		}
 	}
+	free_array(line);
 }
 
 static int	check_value(char *rgb)
 {
-	int	i;
-	int	nb;
+	int		nb;
+	char	**tmp;
 
 	nb = 0;
-	i = -1;
-	while (rgb[++i])
+	if (rgb[0] && (rgb[0] == 'C' || rgb[0] == 'F'))
 	{
-		if (nb > 1 && rgb[i] == ' ')
-			ft_handlerror(4);
-		if ((rgb[i] == ' ' && i == 1) || rgb[i] == '\n' \
-			|| (rgb[i] == 'F' && i == 0) || (rgb[i] == 'C' && i == 0))
-			continue ;
-		if (!ft_isdigit(rgb[i]))
-			ft_handlerror(4);
-		else if (ft_isdigit(rgb[i]))
-			nb++;
+		if (rgb[1] != ' ' && rgb[1] != '\t')
+			ft_handlerror(1);
 	}
+	tmp = ft_split(rgb + 1, ' ');
+	if (tmp[1])
+	{
+		free_array(tmp);
+		ft_handlerror(1);
+	}
+	free_array(tmp);
 	return (nb);
 }
 
@@ -95,7 +94,7 @@ void	check_path(char **elem, char *path)
 		ft_handlerror(2);
 	fd = open(tmp, O_RDONLY);
 	if (fd == -1)
-	{	
+	{
 		free_array(elem);
 		ft_handlerror(2);
 	}
@@ -127,9 +126,9 @@ void	check_param(t_cube *cube)
 		{
 			free_array(tmp);
 			tmp = ft_split(cube->elem[i], ',');
+			remove_nl(tmp);
 			check_rgb(tmp);
 			get_color_arr(cube, tmp, 0);
-			free_array(tmp);
 		}
 	}
 }
