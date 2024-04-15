@@ -6,7 +6,7 @@
 /*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:19:56 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/04/15 15:36:57 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/04/15 22:14:42 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,18 @@ static int	check_value(char *rgb)
 	char	**tmp;
 
 	nb = 0;
+	if (!ft_strcmp(rgb, ""))
+		ft_handlerror(0);
 	if (rgb[0] && (rgb[0] == 'C' || rgb[0] == 'F'))
 	{
 		if (rgb[1] != ' ' && rgb[1] != '\t')
-			ft_handlerror(1);
+			ft_handlerror(0);
 	}
 	tmp = ft_split(rgb + 1, ' ');
-	if (tmp[1])
+	if (tmp && tmp[1])
 	{
 		free_array(tmp);
-		ft_handlerror(1);
+		ft_handlerror(0);
 	}
 	free_array(tmp);
 	return (nb);
@@ -70,10 +72,11 @@ void	check_rgb(char **rgb)
 	i = -1;
 	while (rgb[++i])
 	{
-		if (i == 0 && (ft_strlen(rgb[i]) < 3 || ft_atoi(rgb[i] + 2) > 255))
+		if (i == 0 && (ft_strlen(rgb[i]) < 3 || ft_atoi(rgb[i] + 2) > 255 \
+			|| ft_atoi(rgb[i] + 2) < 0)) // j'ai gere les valeurs negatives
 			ft_handlerror(3);
 		nb = check_value(rgb[i]);
-		if (nb > 3 || ft_atoi(rgb[i]) > 255)
+		if (nb > 3 || ft_atoi(rgb[i]) < 0 || ft_atoi(rgb[i]) > 255)
 			ft_handlerror(3);
 	}
 	if (i != 3)
