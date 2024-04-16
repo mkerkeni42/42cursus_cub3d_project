@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_param.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:19:56 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/04/15 22:14:42 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/04/16 10:16:32 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,15 @@ void	get_color_arr(t_cube *cube, char **line, int x)
 	free_array(line);
 }
 
-static int	check_value(char *rgb)
+static void	check_value(char *rgb)
 {
-	int		nb;
 	char	**tmp;
 
-	nb = 0;
 	if (!ft_strcmp(rgb, ""))
 		ft_handlerror(0);
 	if (rgb[0] && (rgb[0] == 'C' || rgb[0] == 'F'))
-	{
-		if (rgb[1] != ' ' && rgb[1] != '\t')
+		if (rgb[1] != ' ')
 			ft_handlerror(0);
-	}
 	tmp = ft_split(rgb + 1, ' ');
 	if (tmp && tmp[1])
 	{
@@ -61,26 +57,26 @@ static int	check_value(char *rgb)
 		ft_handlerror(0);
 	}
 	free_array(tmp);
-	return (nb);
 }
 
-void	check_rgb(char **rgb)
+void	check_rgb(t_cube *cube, char **rgb)
 {
 	int		i;
-	int		nb;
 
 	i = -1;
+	remove_nl(rgb);
 	while (rgb[++i])
 	{
 		if (i == 0 && (ft_strlen(rgb[i]) < 3 || ft_atoi(rgb[i] + 2) > 255 \
-			|| ft_atoi(rgb[i] + 2) < 0)) // j'ai gere les valeurs negatives
+			|| ft_atoi(rgb[i] + 2) < 0))
 			ft_handlerror(3);
-		nb = check_value(rgb[i]);
-		if (nb > 3 || ft_atoi(rgb[i]) < 0 || ft_atoi(rgb[i]) > 255)
+		check_value(rgb[i]);
+		if (ft_atoi(rgb[i]) < 0 || ft_atoi(rgb[i]) > 255)
 			ft_handlerror(3);
 	}
 	if (i != 3)
 		ft_handlerror(5);
+	get_color_arr(cube, rgb, 0);
 }
 
 void	check_path(char **elem, char *path)
@@ -89,7 +85,7 @@ void	check_path(char **elem, char *path)
 	char	*tmp;
 
 	fd = -1;
-	tmp = ft_malloc(sizeof(char) * ft_strlen(path) + 1); // ici j'ai rajoute le + 1 pour le \0
+	tmp = ft_malloc(sizeof(char) * ft_strlen(path) + 1);
 	while (path[++fd] && path[fd] != '\n')
 		tmp[fd] = path[fd];
 	tmp[fd] = '\0';
@@ -120,7 +116,7 @@ void	check_param(t_cube *cube)
 		{
 			while (tmp[j])
 				j++;
-			if (j != 2) // check si plus de 2 arguments pour la texture
+			if (j != 2)
 				ft_handlerror(0);
 			check_path(tmp, tmp[1]);
 			free_array(tmp);
@@ -129,9 +125,7 @@ void	check_param(t_cube *cube)
 		{
 			free_array(tmp);
 			tmp = ft_split(cube->elem[i], ',');
-			remove_nl(tmp);
-			check_rgb(tmp);
-			get_color_arr(cube, tmp, 0);
+			check_rgb(cube,tmp);
 		}
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_elem.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 09:22:39 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/04/13 00:04:32 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/04/16 08:58:35 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	cpy_elem(t_cube *cube)
 	set_elem(cube);
 	while (j < 6 && cube->file[++cube->i])
 		check_res(cube, &j, pars_elem(cube));
-	cube->elem[j] = NULL; // ici j'ai mis j au lieu de cube->i
+	cube->elem[j] = NULL;
 	if (j != 6)
 		ft_handlerror(1);
 	check_param(cube);

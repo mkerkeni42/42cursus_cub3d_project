@@ -18,13 +18,13 @@ void	get_texture_file(t_game *game)
 	int	j;
 
 	i = -1;
-	j = -1; // ici j'ai ajoute un index j pour iterer sur le nouveau tableau textures qui contient uniquement les 4 textures
+	j = -1;
 	while (game->cube->elem[++i])
 	{
 		if (game->cube->elem[i][0] != 'F' && game->cube->elem[i][0] != 'C')
 			game->textures[++j] = ft_strdup(game->cube->elem[i]);
 	}
-	game->textures[j + 1] = '\0'; // ici il manquait le + 1
+	game->textures[j + 1] = '\0';
 }
 
 static t_texture	get_texture_infos(t_game *game, char *path)

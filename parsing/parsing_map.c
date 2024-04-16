@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:47:30 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/04/13 00:06:20 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/04/16 09:43:48 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	check_map(t_cube *cube)
 		{
 			if ((i == 0 || i == cube->l || j == 0 \
 				|| j == ft_strlen(cube->map[i])) && cube->map[i][j] != '1' \
-				&& cube->map[i][j] != ' ' && cube->map[i][j] != '\n') //ajout de la verification sur le cote
+				&& cube->map[i][j] != ' ' && cube->map[i][j] != '\n')
 				ft_handlerror(7);
 			check_pos(cube, cube->map[i][j]);
 			if (check_value(cube->map[i][j], 0) && cube->map[i][j] != ' ' \
@@ -91,9 +91,8 @@ void	check_file(t_cube *cube)
 		j = -1;
 		while (cube->file[cube->i][++j])
 		{
-			if (cube->file[cube->i][j] != ' ' \
-				&& check_value(cube->file[cube->i][j], 0) \
-					&& cube->file[cube->i][j] != '\n')
+			if (cube->file[cube->i][j] != ' ' && cube->file[cube->i][j] != '1' \
+				&& cube->file[cube->i][j] != '\n')
 				ft_handlerror(6);
 			if (cube->file[cube->i][j] == '1')
 			{
