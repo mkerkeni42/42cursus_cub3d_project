@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_param.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:19:56 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/04/18 10:59:03 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:00:03 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ static void	check_value(char *rgb)
 	while (tmp[++i])
 	{
 		j = -1;
-		if (!ft_isdigit(tmp[i][++j]))
-			ft_handlerror(4);
+		while (tmp[i][++j])
+			if (!ft_isdigit(tmp[i][j]))
+				ft_handlerror(4);
 	}
 	free_array(tmp);
 }
@@ -96,8 +97,8 @@ void	check_path(char **elem, char *path)
 	char	*tmp;
 
 	fd = -1;
-	tmp = ft_malloc(sizeof(char) * ft_strlen(path) + 1);
-	while (path[++fd] && path[fd] != '\n')
+	tmp = ft_malloc(sizeof(char) * (ft_strlen(path) + 1));
+	while (path[++fd])
 		tmp[fd] = path[fd];
 	tmp[fd] = '\0';
 	if (file_name(tmp))
@@ -119,9 +120,9 @@ void	check_param(t_cube *cube)
 	int		j;
 
 	i = -1;
-	j = 0;
 	while (cube->elem[++i])
 	{
+		j = 0;
 		tmp = ft_split(cube->elem[i], ' ');
 		if (ft_strlen(tmp[0]) == 2)
 		{

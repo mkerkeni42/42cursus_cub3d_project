@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:47:30 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/04/18 11:07:30 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/04/18 11:33:55 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,23 @@ static int	check_value(int c, int x)
 		return (1);
 	if (x == 1 && (c == ' ' || c == '\n' || c == '\0'))
 		return (1);
+	else if (x == 2 && (c == '0' || c == 'N' || c == 'S' || c == 'E' \
+		|| c == 'W'))
+		return (1);
 	return (0);
 }
 
 static void	check_around(t_cube *cube, int i, int j)
 {
-	if (cube->map[i + 1][j] && check_value(cube->map[i + 1][j], 1))
+	if (ft_strlen(cube->map[i + 1]) > j && cube->map[i + 1][j] \
+		&& check_value(cube->map[i + 1][j], 1))
 		ft_handlerror(7);
-	if (cube->map[i - 1][j] && check_value(cube->map[i - 1][j], 1))
+	else if (ft_strlen(cube->map[i + 1]) < j && check_value(cube->map[i][j], 2))
+		ft_handlerror(7);
+	if (ft_strlen(cube->map[i - 1]) > j && cube->map[i - 1][j] \
+		&& check_value(cube->map[i - 1][j], 1))
+		ft_handlerror(7);
+	else if (ft_strlen(cube->map[i - 1]) < j && check_value(cube->map[i][j], 2))
 		ft_handlerror(7);
 	if (cube->map[i][j + 1] && check_value(cube->map[i][j + 1], 1))
 		ft_handlerror(7);

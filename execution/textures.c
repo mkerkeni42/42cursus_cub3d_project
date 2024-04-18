@@ -30,30 +30,39 @@ void	get_texture_file(t_game *game)
 static t_texture	get_texture_infos(t_game *game, char *path)
 {
 	t_texture	text;
-	char		*path2;
+	char		*start;
+	int			end;
+	char		*new_path;
 
-	path2 = ft_strchr(path, '.');
+	start = ft_strchr(path, '.');
+	end = get_space_index(start);
+	new_path = ft_substr(start, 0, end);
 	text.img = mlx_xpm_file_to_image(game->mlx, \
-		path2, &text.x, &text.y);
+		new_path, &text.x, &text.y);
 	text.addr = mlx_get_data_addr(text.img, &(text.bit_per_pixel), \
 		&(text.line_len), &(text.endian));
+	free(new_path);
 	return (text);
 }
 
 void	get_textures(t_game *game)
 {
 	int	i;
+	int	j;
 
 	i = -1;
 	while (game->textures[++i])
 	{
-		if ((game->textures[i][0] == 'S'))
+		j = 0;
+		while (game->textures[i][j] && game->textures[i][j] == ' ')
+			j++;
+		if ((game->textures[i][j] == 'S'))
 			game->so = get_texture_infos(game, game->textures[i]);
-		else if (game->textures[i][0] == 'N')
+		else if (game->textures[i][j] == 'N')
 			game->no = get_texture_infos(game, game->textures[i]);
-		else if ((game->textures[i][0] == 'E'))
+		else if ((game->textures[i][j] == 'E'))
 			game->ea = get_texture_infos(game, game->textures[i]);
-		else if ((game->textures[i][0] == 'W'))
+		else if ((game->textures[i][j] == 'W'))
 			game->we = get_texture_infos(game, game->textures[i]);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_elem.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 09:22:39 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/04/16 08:58:35 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/04/18 14:23:11 by mkerkeni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,16 @@ static int	pars_elem(t_cube *cube)
 
 static void	check_res(t_cube *cube, int *j, int res)
 {
+	int	len;
+
 	if (res == -1)
 		return ;
 	else if (!res)
 	{
+		len = skip_spaces(cube->file[cube->i]);
 		cube->elem[*j] = ft_malloc(sizeof(char) \
-			* (ft_strlen(cube->file[cube->i]) + 1));
-		cube->elem[*j] = ft_strcpy(cube->elem[*j], cube->file[cube->i]);
+			* (ft_strlen(cube->file[cube->i]) - len + 1));
+		cube->elem[*j] = ft_strcpy(cube->elem[*j], cube->file[cube->i] + len);
 		(*j)++;
 	}
 	else
@@ -97,8 +100,8 @@ void	cpy_elem(t_cube *cube)
 	cube->elem[j] = NULL;
 	if (j != 6)
 		ft_handlerror(1);
+	remove_nl(cube->elem);
 	check_param(cube);
 	check_file(cube);
 	remove_nl(cube->map);
-	remove_nl(cube->elem);
 }
