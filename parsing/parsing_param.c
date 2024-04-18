@@ -6,7 +6,7 @@
 /*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:19:56 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/04/16 10:16:32 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/04/18 10:37:28 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	get_color_arr(t_cube *cube, char **line, int x)
 static void	check_value(char *rgb)
 {
 	char	**tmp;
+	int		i;
+	int		j;
 
 	if (!ft_strcmp(rgb, ""))
 		ft_handlerror(0);
@@ -55,6 +57,13 @@ static void	check_value(char *rgb)
 	{
 		free_array(tmp);
 		ft_handlerror(0);
+	}
+	i = -1;
+	while (tmp[++i])
+	{
+		j = -1;
+		if (!ft_isdigit(tmp[i][++j]))
+			ft_handlerror(4);
 	}
 	free_array(tmp);
 }
@@ -125,7 +134,7 @@ void	check_param(t_cube *cube)
 		{
 			free_array(tmp);
 			tmp = ft_split(cube->elem[i], ',');
-			check_rgb(cube,tmp);
+			check_rgb(cube, tmp);
 		}
 	}
 }
