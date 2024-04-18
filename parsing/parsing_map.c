@@ -6,7 +6,7 @@
 /*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:47:30 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/04/16 09:43:48 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/04/18 11:07:30 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ static int	check_value(int c, int x)
 
 static void	check_around(t_cube *cube, int i, int j)
 {
-	if (check_value(cube->map[i + 1][j], 1))
+	if (cube->map[i + 1][j] && check_value(cube->map[i + 1][j], 1))
 		ft_handlerror(7);
-	if (check_value(cube->map[i - 1][j], 1))
+	if (cube->map[i - 1][j] && check_value(cube->map[i - 1][j], 1))
 		ft_handlerror(7);
-	if (check_value(cube->map[i][j + 1], 1))
+	if (cube->map[i][j + 1] && check_value(cube->map[i][j + 1], 1))
 		ft_handlerror(7);
-	if (check_value(cube->map[i][j - 1], 1))
+	if (cube->map[i][j - 1] && check_value(cube->map[i][j - 1], 1))
 		ft_handlerror(7);
 }
 

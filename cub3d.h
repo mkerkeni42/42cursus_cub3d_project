@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkerkeni <mkerkeni@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 09:00:05 by mkerkeni          #+#    #+#             */
-/*   Updated: 2024/04/12 11:05:45 by mkerkeni         ###   ########.fr       */
+/*   Updated: 2024/04/18 11:01:17 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ void		check_file(t_cube *cube);
 void		check_pos(t_cube *cube, int c);
 int			file_name(char *file_name);
 int			check_file_name(char *file_name);
+int			count_comma(char *str);
 
 /*==========================UTILS==========================*/
 

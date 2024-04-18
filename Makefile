@@ -20,6 +20,7 @@ SRCS	=	main.c \
 			parsing/parsing_elem.c \
 			parsing/parsing_param.c \
 			parsing/parsing_map.c \
+			parsing/parsing_utils.c \
 			execution/deal_hook.c \
 			execution/movements.c \
 			execution/raycasting.c \

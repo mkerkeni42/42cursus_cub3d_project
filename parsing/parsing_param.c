@@ -6,7 +6,7 @@
 /*   By: ykifadji <ykifadji@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 11:19:56 by ykifadji          #+#    #+#             */
-/*   Updated: 2024/04/18 10:37:28 by ykifadji         ###   ########.fr       */
+/*   Updated: 2024/04/18 10:59:03 by ykifadji         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,13 @@ static void	check_value(char *rgb)
 	free_array(tmp);
 }
 
-void	check_rgb(t_cube *cube, char **rgb)
+void	check_rgb(t_cube *cube, char **rgb, int c)
 {
 	int		i;
 
 	i = -1;
+	if (count_comma(cube->elem[c]) != 2)
+		ft_handlerror(5);
 	remove_nl(rgb);
 	while (rgb[++i])
 	{
@@ -134,7 +136,7 @@ void	check_param(t_cube *cube)
 		{
 			free_array(tmp);
 			tmp = ft_split(cube->elem[i], ',');
-			check_rgb(cube, tmp);
+			check_rgb(cube, tmp, i);
 		}
 	}
 }
