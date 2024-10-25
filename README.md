@@ -6,6 +6,8 @@ While it’s not a playable game, it recreates the immersive visuals of a game e
 This project was an incredible opportunity to combine math, graphics, and programming skills, making it both a technical and creative journey. 
 Built with **MinilibX**, it's where code meets imagination!
 
+<img src="screenshots/Capture d'écran 2024-10-25 162138.png" alt="My Image" height="250"/> <img src="screenshots/Capture d'écran 2024-10-25 161835.png" alt="My Image" height="250"/> 
+
 ## Technologies Used 💻
 <img src="https://cdn.worldvectorlogo.com/logos/c-1.svg" alt="C" width="40" height="40"/>
 
