@@ -14,7 +14,7 @@ Built with **MinilibX**, it's where code meets imagination!
 
 2. **Run** the scene:
   ```
-  ./cub3D path/to/map.cub
+  ./cub3D maps/map.cub
   ```
 
 Use W, A, S, D to move and arrow keys to rotate. Quit anytime with ESC.
